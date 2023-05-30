@@ -1,8 +1,30 @@
+import React, { useContext, useState } from "react";
 import InputField from "components/fields/InputField";
 import { FcGoogle } from "react-icons/fc";
 import Checkbox from "components/checkbox";
+import { Link } from "react-router-dom";
+import { AuthContext } from "context/authContext";
 
 export default function SignIn() {
+  const { login } = useContext(AuthContext);
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+
+  /* use react curring to pass the email and password to the login function */
+  const handleChange = (setState: any) => (e: React.ChangeEvent<HTMLInputElement>) => {
+    setState(e.target.value);
+  }
+
+  const handleSubmit: React.MouseEventHandler<HTMLButtonElement> = async (e) => {
+    e.preventDefault();
+    try {
+      await login(email, password);
+      // Additional actions upon successful login
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <div className="mt-16 mb-16 flex h-full w-full items-center justify-center px-2 md:mx-0 md:px-0 lg:mb-10 lg:items-center lg:justify-start">
       {/* Sign in section */}
@@ -34,6 +56,8 @@ export default function SignIn() {
           placeholder="mail@simmmple.com"
           id="email"
           type="text"
+          value={email}
+          onChange={handleChange(setEmail)}
         />
 
         {/* Password */}
@@ -44,6 +68,8 @@ export default function SignIn() {
           placeholder="Min. 8 characters"
           id="password"
           type="password"
+          value={password}
+          onChange={handleChange(setPassword)}
         />
         {/* Checkbox */}
         <div className="mb-4 flex items-center justify-between px-2">
@@ -60,7 +86,10 @@ export default function SignIn() {
             Forgot Password?
           </a>
         </div>
-        <button className="linear mt-2 w-full rounded-xl bg-brand-500 py-[12px] text-base font-medium text-white transition duration-200 hover:bg-brand-600 active:bg-brand-700 dark:bg-brand-400 dark:text-white dark:hover:bg-brand-300 dark:active:bg-brand-200">
+        <button
+          className="linear mt-2 w-full rounded-xl bg-brand-500 py-[12px] text-base font-medium text-white transition duration-200 hover:bg-brand-600 active:bg-brand-700 dark:bg-brand-400 dark:text-white dark:hover:bg-brand-300 dark:active:bg-brand-200"
+          onClick={handleSubmit}
+        >
           Sign In
         </button>
         <div className="mt-4">
