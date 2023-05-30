@@ -3,10 +3,10 @@ import InputField from "components/fields/InputField";
 import { FcGoogle } from "react-icons/fc";
 import Checkbox from "components/checkbox";
 import { Link } from "react-router-dom";
-import { AuthContext } from "context/authContext";
+import { useApi } from "../../utils/api"
 
 export default function SignIn() {
-  const { login } = useContext(AuthContext);
+  const { login } = useApi();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 

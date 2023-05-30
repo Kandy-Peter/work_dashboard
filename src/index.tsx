@@ -2,16 +2,19 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import "./index.css";
 
-import { AuthProvider } from "context/authContext";
+import { CookiesProvider } from 'react-cookie';
+import { UserProvider } from './context/userContext'
 
 import App from "./App";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
-  <AuthProvider>
+  <CookiesProvider>
+  <UserProvider>
     <BrowserRouter>
         <App />
     </BrowserRouter>
-  </AuthProvider>
+  </UserProvider>
+  </CookiesProvider>
 );
