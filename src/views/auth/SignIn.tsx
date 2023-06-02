@@ -1,14 +1,15 @@
-import React, { useContext, useState } from "react";
+import React, {  useState, useContext } from "react";
+import { Link } from "react-router-dom";
 import InputField from "components/fields/InputField";
 import { FcGoogle } from "react-icons/fc";
 import Checkbox from "components/checkbox";
-import { Link } from "react-router-dom";
 import { useApi } from "../../utils/api"
 
 export default function SignIn() {
   const { login } = useApi();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [error, setError] = useState<string | null>(null);
 
   /* use react curring to pass the email and password to the login function */
   const handleChange = (setState: any) => (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -18,12 +19,22 @@ export default function SignIn() {
   const handleSubmit: React.MouseEventHandler<HTMLButtonElement> = async (e) => {
     e.preventDefault();
     try {
-      await login(email, password);
-      // Additional actions upon successful login
+      if (!email || !password) {
+        setError("Please fill in all fields");
+        return;
+      }
+      
+      if (error) {
+        setError(null);
+      } else {
+        await login(email, password);
+      }
     } catch (error) {
       console.log(error);
     }
   }
+
+  console.log('error: ', error)
 
   return (
     <div className="mt-16 mb-16 flex h-full w-full items-center justify-center px-2 md:mx-0 md:px-0 lg:mb-10 lg:items-center lg:justify-start">
@@ -55,8 +66,9 @@ export default function SignIn() {
           label="Email*"
           placeholder="mail@simmmple.com"
           id="email"
-          type="text"
+          type="email"
           value={email}
+          error={error || ""}
           onChange={handleChange(setEmail)}
         />
 
@@ -69,6 +81,7 @@ export default function SignIn() {
           id="password"
           type="password"
           value={password}
+          error={error || ""}
           onChange={handleChange(setPassword)}
         />
         {/* Checkbox */}
@@ -79,16 +92,16 @@ export default function SignIn() {
               Keep me logged In
             </p>
           </div>
-          <a
-            className="text-sm font-medium text-brand-500 hover:text-brand-600 dark:text-white"
-            href=" "
-          >
-            Forgot Password?
-          </a>
+          <Link to="/password_reset">
+            <button className="text-sm font-medium text-brand-500 hover:text-brand-600 dark:text-white" type="button">
+              Forgot Password?
+            </button>
+          </Link>
         </div>
         <button
           className="linear mt-2 w-full rounded-xl bg-brand-500 py-[12px] text-base font-medium text-white transition duration-200 hover:bg-brand-600 active:bg-brand-700 dark:bg-brand-400 dark:text-white dark:hover:bg-brand-300 dark:active:bg-brand-200"
           onClick={handleSubmit}
+          disabled={error ? true : false}
         >
           Sign In
         </button>

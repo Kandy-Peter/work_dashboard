@@ -1,5 +1,7 @@
 // Custom components
-import React from "react";
+import React, { useContext} from "react";
+import { validateInput } from "utils/InputsValidation";
+import { UserContext } from '../../context/userContext'
 
 function InputField(props: {
   id: string;
@@ -11,10 +13,22 @@ function InputField(props: {
   disabled?: boolean;
   type?: string;
   value?: string;
+  error?: string | null;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }) {
-  const { label, id, extra, type, placeholder, variant, state, disabled, value, onChange } =
+  const { label, id, extra, type, placeholder, variant, state, disabled, value, error, onChange } =
     props;
+  const [inputError, setInputError] = React.useState<string | null>(null);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    const validationError = validateInput(type || "", value);
+    setInputError(validationError);
+
+    if (onChange) {
+      onChange(e);
+    }
+  };
 
   return (
     <div className={`${extra}`}>
@@ -32,7 +46,7 @@ function InputField(props: {
         id={id}
         placeholder={placeholder}
         value={value}
-        onChange={onChange}
+        onChange={handleChange}
         className={`mt-2 flex h-12 w-full items-center justify-center rounded-xl border bg-white/0 p-3 text-sm outline-none ${
           disabled === true
             ? "!border-none !bg-gray-100 dark:!bg-white/5 dark:placeholder:!text-[rgba(255,255,255,0.15)]"
@@ -43,6 +57,9 @@ function InputField(props: {
             : "border-gray-200 dark:!border-white/10 dark:text-white"
         }`}
       />
+      {error && (
+        <p className="text-red-500 text-sm mt-1">{inputError}</p>
+      )}
     </div>
   );
 }

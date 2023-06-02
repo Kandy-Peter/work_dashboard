@@ -1,10 +1,10 @@
 import axios from 'axios';
-import { useCookies } from 'react-cookie';
+import { useCookies, Cookies } from 'react-cookie';
 import { useContext, useState } from 'react';
 
 import { UserContext } from '../context/userContext';
 
-const API_URL = 'http://localhost:4000/api/v1';
+const API_URL = process.env.REACT_APP_API_URL;
 
 const api = axios.create({
   baseURL: API_URL,
@@ -39,10 +39,17 @@ export const useApi = () => {
 
   const resetPassword = async (email: string) => {
     try {
-      // Make the reset password API request
-      await api.post('/reset-password', { email });
+      await api.post('/password_resets', { email });
     } catch (error) {
-      // Handle reset password error
+      console.log(error)
+    }
+  };
+
+  const updatePassword = async (password: string, password_confirmation: string, token: string) => {
+    try {
+      await api.put(`/password_resets/${token}`, { password, password_confirmation });
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -50,6 +57,7 @@ export const useApi = () => {
     login,
     logout,
     resetPassword,
+    updatePassword,
   };
 };
 
