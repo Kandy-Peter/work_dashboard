@@ -2,13 +2,16 @@ import React from 'react';
 import InputField from "components/fields/InputField";
 
 import { useApi } from '../../utils/api';
+import { validateEmail } from "utils/InputsValidation";
 
 const ForgetPassword = () => {
   const { resetPassword } = useApi();
   const [email, setEmail] = React.useState<string>('');
+  const [error, setError] = React.useState<string>('');
 
   const handleChangeEmail = (setState: any) => (e: React.ChangeEvent<HTMLInputElement>) => {
     setState(e.target.value);
+    setError(validateEmail(e.target.value));
   };
 
   const handleSubmit: React.MouseEventHandler<HTMLButtonElement> = async (e) => {
@@ -41,6 +44,7 @@ const ForgetPassword = () => {
           id="email"
           type="text"
           value={email}
+          error={error}
           onChange={handleChangeEmail(setEmail)}
         />
         <button

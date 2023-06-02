@@ -4,37 +4,36 @@ import InputField from "components/fields/InputField";
 import { FcGoogle } from "react-icons/fc";
 import Checkbox from "components/checkbox";
 import { useApi } from "../../utils/api"
+import { validateEmail, validatePassword } from "utils/InputsValidation";
 
 export default function SignIn() {
   const { login } = useApi();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState({
+    email: "",
+    password: "",
+  })
 
   /* use react curring to pass the email and password to the login function */
   const handleChange = (setState: any) => (e: React.ChangeEvent<HTMLInputElement>) => {
     setState(e.target.value);
-  }
+    if (e.target.id === "email") {
+      setError({ ...error, email: validateEmail(e.target.value) })
+    }
+    if (e.target.id === "password") {
+      setError({ ...error, password: validatePassword(e.target.value) })
+    }
+  };
 
   const handleSubmit: React.MouseEventHandler<HTMLButtonElement> = async (e) => {
     e.preventDefault();
     try {
-      if (!email || !password) {
-        setError("Please fill in all fields");
-        return;
-      }
-      
-      if (error) {
-        setError(null);
-      } else {
-        await login(email, password);
-      }
+      await login(email, password);
     } catch (error) {
       console.log(error);
     }
   }
-
-  console.log('error: ', error)
 
   return (
     <div className="mt-16 mb-16 flex h-full w-full items-center justify-center px-2 md:mx-0 md:px-0 lg:mb-10 lg:items-center lg:justify-start">
@@ -68,7 +67,7 @@ export default function SignIn() {
           id="email"
           type="email"
           value={email}
-          error={error || ""}
+          error={error.email || ""}
           onChange={handleChange(setEmail)}
         />
 
@@ -81,7 +80,7 @@ export default function SignIn() {
           id="password"
           type="password"
           value={password}
-          error={error || ""}
+          error={error.password || ""}
           onChange={handleChange(setPassword)}
         />
         {/* Checkbox */}

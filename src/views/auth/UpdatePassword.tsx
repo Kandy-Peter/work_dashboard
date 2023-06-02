@@ -4,23 +4,31 @@ import InputField from "components/fields/InputField";
 import { useParams } from 'react-router-dom';
 
 import { useApi } from '../../utils/api';
+import { validatePassword, validatePasswordConfirmation } from "utils/InputsValidation";
 
 const ResetPassword = () => {
   const { updatePassword } = useApi();
   const { token } = useParams<{ token: string }>();
   const [password, setPassword] = React.useState<string>('');
   const [password_confirmation, setPasswordConfirmation] = React.useState<string>('');
+  const [error, setError] = React.useState({
+    password: '',
+    password_confirmation: '',
+  })
+  
 
   const handleChange = (setState: any) => (e: React.ChangeEvent<HTMLInputElement>) => {
     setState(e.target.value);
+    if (e.target.id === "password") {
+      setError({ ...error, password: validatePassword(e.target.value) })
+    }
+
+    if (e.target.id === 'password_confirmation') {
+      setError({ ...error, password_confirmation: validatePasswordConfirmation(e.target.value, password_confirmation) })
+    }
   };
 
   const handleSubmit: React.MouseEventHandler<HTMLButtonElement> = async (e) => {
-    if (password !== password_confirmation) {
-      alert('Passwords do not match');
-      return;
-    }
-
     e.preventDefault();
     try {
       await updatePassword(password, password_confirmation, token);
@@ -51,6 +59,7 @@ const ResetPassword = () => {
           id="password"
           type="password"
           value={password}
+          error={error.password}
           onChange={handleChange(setPassword)}
         />
         <InputField
@@ -61,6 +70,7 @@ const ResetPassword = () => {
           id="password_confirmation"
           type="password"
           value={password_confirmation}
+          error={error.password_confirmation}
           onChange={handleChange(setPasswordConfirmation)}
         />
         <button

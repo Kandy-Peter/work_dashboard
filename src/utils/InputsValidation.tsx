@@ -1,26 +1,35 @@
 // validator.tsx
-export function validateInput(type: string, value: string): string | null {
-  switch (type) {
-    case "email":
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
-        return "Invalid email";
-      }
-      break;
-
-    case "password":
-      if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/.test(value)) {
-        return "Password must contain at least 8 characters, 1 uppercase letter, 1 lowercase letter and 1 number";
-      }
-      break;
-    
-    case "name":
-      if (!/^[a-zA-Z0-9_]{3,25}$/.test(value)) {
-        return `${type} must contain at least 3 characters and no more than 25 characters`;
-      }
-      break;
-    default:
-      break;
+export const validateEmail = (email: string) => {
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!regex.test(email)) {
+    return "Please enter a valid email address";
   }
+  if (email.length === 0 || email === "") {
+    return "Please enter an email address";
+  }
+}
 
-  return null; // Return null if validation passes
+export const validatePassword = (password: string) => {
+  if (password.length === 0 || password === "") {
+    return "Please enter a password";
+  }
+  if (password.length < 8) {
+    return "Password must be at least 8 characters";
+  }
+}
+
+
+export const validatePasswordConfirmation = (password: string, password_confirmation: string) => {
+  if (password_confirmation.length === 0 || password_confirmation === "") {
+    return "Please enter a password confirmation";
+  }
+  if (password_confirmation !== password) {
+    return "Passwords do not match";
+  }
+}
+
+export const validateName = (name: string) => {
+  if (name.length === 0 || name === "") {
+    return "Please enter a name";
+  }
 }
