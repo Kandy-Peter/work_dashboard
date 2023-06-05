@@ -53,19 +53,11 @@ export default function SignIn() {
           Sign In
         </h4>
         <p className="mb-9 ml-1 text-base text-gray-600">
-          Enter your email and password to sign in!
+          Enter your orgnaisation email and password to sign in!
         </p>
-        <div className="mb-6 flex h-[50px] w-full items-center justify-center gap-2 rounded-xl bg-lightPrimary hover:cursor-pointer dark:bg-navy-800">
-          <div className="rounded-full text-xl">
-            <FcGoogle />
-          </div>
-          <h5 className="text-sm font-medium text-navy-700 dark:text-white">
-            Sign In with Google
-          </h5>
-        </div>
         <div className="mb-6 flex items-center  gap-3">
           <div className="h-px w-full bg-gray-200 dark:bg-navy-700" />
-          <p className="text-base text-gray-600 dark:text-white"> or </p>
+          <p className="text-base text-gray-600 dark:text-white"> kazi </p>
           <div className="h-px w-full bg-gray-200 dark:bg-navy-700" />
         </div>
         {/* Email */}
@@ -102,13 +94,13 @@ export default function SignIn() {
             </p>
           </div>
           <Link to="/password_reset">
-            <button className="text-sm font-medium text-brand-500 hover:text-brand-600 dark:text-white" type="button">
+            <button className="text-sm font-medium text-cyan-700 hover:text-cyan-600 dark:text-white" type="button">
               Forgot Password?
             </button>
           </Link>
         </div>
         <button
-          className="linear mt-2 w-full rounded-xl bg-brand-500 py-[12px] text-base font-medium text-white transition duration-200 hover:bg-brand-600 active:bg-brand-700 dark:bg-brand-400 dark:text-white dark:hover:bg-brand-300 dark:active:bg-brand-200"
+          className="linear mt-2 w-full rounded-xl bg-cyan-500 py-[12px] text-base font-medium text-white transition duration-200 hover:bg-cyan-600 active:bg-cyan-700 dark:bg-cyan-400 dark:text-white dark:hover:bg-cyan-300 dark:active:bg-cyan-200"
           onClick={handleSubmit}
           // disabled={error ? true : false}
         >
@@ -116,11 +108,11 @@ export default function SignIn() {
         </button>
         <div className="mt-4">
           <span className=" text-sm font-medium text-navy-700 dark:text-gray-600">
-            Not registered yet?
+            Request a demo?
           </span>
           <a
             href=" "
-            className="ml-1 text-sm font-medium text-brand-500 hover:text-brand-600 dark:text-white"
+            className="ml-1 text-sm font-medium text-cyan-700 hover:text-cyan-600 dark:text-white"
           >
             Create an account
           </a>
