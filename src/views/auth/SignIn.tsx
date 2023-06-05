@@ -1,11 +1,7 @@
 import React, {  useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import toast from "react-hot-toast";
-import { Cookies } from "react-cookie";
-
 
 import InputField from "components/fields/InputField";
-import { FcGoogle } from "react-icons/fc";
 import Checkbox from "components/checkbox";
 import { useApi } from "../../utils/api"
 import { validateEmail, validatePassword } from "utils/InputsValidation";
@@ -13,7 +9,6 @@ import { validateEmail, validatePassword } from "utils/InputsValidation";
 export default function SignIn() {
   const { login } = useApi();
   const navigate = useNavigate();
-  const cookies = new Cookies();
 
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -49,16 +44,16 @@ export default function SignIn() {
     <div className="mt-16 mb-16 flex h-full w-full items-center justify-center px-2 md:mx-0 md:px-0 lg:mb-10 lg:items-center lg:justify-start">
       {/* Sign in section */}
       <div className="mt-[10vh] w-full max-w-full flex-col items-center md:pl-4 lg:pl-0 xl:max-w-[420px]">
-        <h4 className="mb-2.5 text-4xl font-bold text-navy-700 dark:text-white">
+        <h4 className="mb-2.5 text-4xl font-bold text-sky-700 dark:text-white">
           Sign In
         </h4>
         <p className="mb-9 ml-1 text-base text-gray-600">
           Enter your orgnaisation email and password to sign in!
         </p>
         <div className="mb-6 flex items-center  gap-3">
-          <div className="h-px w-full bg-gray-200 dark:bg-navy-700" />
+          <div className="h-px w-full bg-gray-200 dark:bg-sky-700" />
           <p className="text-base text-gray-600 dark:text-white"> kazi </p>
-          <div className="h-px w-full bg-gray-200 dark:bg-navy-700" />
+          <div className="h-px w-full bg-gray-200 dark:bg-sky-700" />
         </div>
         {/* Email */}
         <InputField
@@ -89,7 +84,7 @@ export default function SignIn() {
         <div className="mb-4 flex items-center justify-between px-2">
           <div className="flex items-center">
             <Checkbox />
-            <p className="ml-2 text-sm font-medium text-navy-700 dark:text-white">
+            <p className="ml-2 text-sm font-medium text-sky-700 dark:text-white">
               Keep me logged In
             </p>
           </div>
@@ -107,7 +102,7 @@ export default function SignIn() {
           Sign In
         </button>
         <div className="mt-4">
-          <span className=" text-sm font-medium text-navy-700 dark:text-gray-600">
+          <span className=" text-sm font-medium text-sky-700 dark:text-gray-600">
             Request a demo?
           </span>
           <a

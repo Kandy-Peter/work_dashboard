@@ -32,7 +32,7 @@ export function SidebarLinks(props: { routes: RoutesType[] }) {
                 <span
                   className={`${
                     activeRoute(route.path) === true
-                      ? "font-bold text-brand-500 dark:text-white"
+                      ? "font-bold text-cyan-500 dark:text-white"
                       : "font-medium text-gray-600"
                   }`}
                 >
@@ -41,7 +41,7 @@ export function SidebarLinks(props: { routes: RoutesType[] }) {
                 <p
                   className={`leading-1 flex ms-4 ${
                     activeRoute(route.path) === true
-                      ? "font-bold text-navy-700 dark:text-white"
+                      ? "font-bold text-sky-700 dark:text-white"
                       : "font-medium text-gray-600"
                   }`}
                 >
@@ -49,7 +49,7 @@ export function SidebarLinks(props: { routes: RoutesType[] }) {
                 </p>
               </li>
               {activeRoute(route.path) ? (
-                <div className="absolute top-px h-9 w-1 rounded-lg bg-brand-500 end-0 dark:bg-brand-400" />
+                <div className="absolute top-px h-9 w-1 rounded-lg bg-cyan-500 end-0 dark:bg-cyan-400" />
               ) : null}
             </div>
           </Link>
@@ -57,7 +57,7 @@ export function SidebarLinks(props: { routes: RoutesType[] }) {
       }
     });
   };
-  // BRAND
+  // cyan
   return <>{createLinks(routes)}</>;
 }
 

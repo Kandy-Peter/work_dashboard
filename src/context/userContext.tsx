@@ -3,27 +3,20 @@ import React, { createContext, useState } from 'react';
 interface UserContextType {
   userInfo: any;
   setUserInfo: (data: any) => void;
-  message: string;
-  setMessage: (message: string) => void;
-  focusedInput: boolean;
-  setFocusedInput: (focused: boolean) => void;
+  theme: string;
+  setTheme: (data: string) => void;
 }
 
 export const UserContext = createContext<UserContextType>({
   userInfo: {},
   setUserInfo: () => {},
-  message: '',
-  setMessage: () => {},
-  focusedInput: false,
-  setFocusedInput: () => {}
+  theme: '',
+  setTheme: () => {},
 });
 
 export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [userInfo, setUserInfo] = useState({});
-  const [message, setMessage] = useState('');
-  const [focusedInput, setFocusedInput] = useState<boolean>(false);
-
-  console.log('message: ', message)
+  const [theme, setTheme] = useState('light');
 
   console.log(userInfo)
 
@@ -32,10 +25,8 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
       {
         userInfo,
         setUserInfo,
-        message,
-        setMessage,
-        focusedInput,
-        setFocusedInput
+        theme,
+        setTheme
       }}>
       {children}
     </UserContext.Provider>

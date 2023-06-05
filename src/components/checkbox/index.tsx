@@ -7,7 +7,7 @@ const Checkbox = (props: {
     | "yellow"
     | "orange"
     | "teal"
-    | "navy"
+    | "sky"
     | "lime"
     | "cyan"
     | "pink"
@@ -36,8 +36,8 @@ const Checkbox = (props: {
           ? "checked:border-none checked:bg-orange-500 dark:checked:bg-orange-400"
           : color === "teal"
           ? "checked:border-none checked:bg-teal-500 dark:checked:bg-teal-400"
-          : color === "navy"
-          ? "checked:border-none checked:bg-navy-500 dark:checked:bg-navy-400"
+          : color === "sky"
+          ? "checked:border-none checked:bg-sky-500 dark:checked:bg-sky-400"
           : color === "lime"
           ? "checked:border-none checked:bg-lime-500 dark:checked:bg-lime-400"
           : color === "cyan"
@@ -52,7 +52,7 @@ const Checkbox = (props: {
           ? "checked:border-none checked:bg-indigo-500 dark:checked:bg-indigo-400"
           : color === "gray"
           ? "checked:border-none checked:bg-gray-500 dark:checked:bg-gray-400"
-          : "checked:bg-brand-500 dark:checked:bg-brand-400"
+          : "checked:bg-cyan-500 dark:checked:bg-cyan-400"
       } ${extra}`}
       name="weekly"
       {...rest}

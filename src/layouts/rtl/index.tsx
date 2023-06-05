@@ -60,7 +60,7 @@ export default function RTL() {
     <div className="flex h-full w-full">
       <Sidebar open={open} onClose={() => setOpen(false)} />
       {/* Navbar & Main Content */}
-      <div className="h-full w-full bg-lightPrimary dark:!bg-navy-900">
+      <div className="h-full w-full bg-lightPrimary dark:!bg-sky-900">
         {/* Main Content */}
         <main
           className={`mx-[12px] h-full flex-none transition-all md:pe-2 xl:mr-[313px]`}
@@ -69,7 +69,7 @@ export default function RTL() {
           <div className="h-full">
             <Navbar
               onOpenSidenav={() => setOpen(true)}
-              brandText={currentRoute}
+              cyanText={currentRoute}
               secondary={getActiveNavbar(routes)}
             />
             <div className="pt-5s mx-auto mb-auto h-full min-h-[84vh] p-2 md:pr-2">
