@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { useCookies, Cookies } from 'react-cookie';
-import { useContext, useState } from 'react';
+import { useCookies} from 'react-cookie';
+import { useContext } from 'react';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
@@ -34,8 +34,8 @@ const showLoadingToast = (message: string) => {
 
 
 export const useApi = () => {
-  const [cookies, setCookie, removeCookie] = useCookies(['token', 'role', 'authenticated', 'user']);
-  const { setUserInfo, setMessage } = useContext(UserContext);
+  const [cookies, setCookie, removeCookie] = useCookies(['token', 'role', 'authenticated']);
+  const { setUserInfo } = useContext(UserContext);
 
   const navigate = useNavigate();
 
@@ -46,6 +46,15 @@ export const useApi = () => {
       const response = await api.post('/auth/login', { email, password });
       toast.dismiss(loadingToast);
       await showSuccessToast(response.data.status.message);
+      
+      const { token, data } = response.data
+      const { role } = response.data.data;
+
+      setCookie('token', token);
+      setCookie('role', role);
+      setCookie('authenticated', true);
+      setUserInfo(data);
+
       navigate('/');
       return response.data;
     } catch (error: any) {
@@ -61,7 +70,9 @@ export const useApi = () => {
     removeCookie('token');
     removeCookie('role');
     removeCookie('authenticated');
+    setUserInfo(null);
     navigate('/auth/sign-in');
+    window.location.reload();
   };
 
   const resetPassword = async (email: string) => {

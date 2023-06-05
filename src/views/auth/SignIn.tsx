@@ -37,10 +37,7 @@ export default function SignIn() {
     e.preventDefault();
   
     try {
-      const response = await login(email, password);
-      const { token, user } = response.data.data;
-      cookies.set('token', token, { path: '/' });
-      cookies.set('user', user, { path: '/' });
+      await login(email, password);
       navigate('/');
     } catch (error: any) {
       console.log(error.response);
