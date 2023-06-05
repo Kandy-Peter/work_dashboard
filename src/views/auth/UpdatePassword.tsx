@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import InputField from "components/fields/InputField";
 import { useParams } from 'react-router-dom';
 
@@ -8,6 +7,7 @@ import { validatePassword, validatePasswordConfirmation } from "utils/InputsVali
 
 const ResetPassword = () => {
   const { updatePassword } = useApi();
+
   const { token } = useParams<{ token: string }>();
   const [password, setPassword] = React.useState<string>('');
   const [password_confirmation, setPasswordConfirmation] = React.useState<string>('');
@@ -35,7 +35,6 @@ const ResetPassword = () => {
     } catch (error) {
       console.log(error);
     }
-
     setPassword('');
     setPasswordConfirmation('');
   }

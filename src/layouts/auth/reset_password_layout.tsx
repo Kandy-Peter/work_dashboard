@@ -3,10 +3,15 @@ import authImg from "assets/img/auth/auth.png";
 import { Link } from "react-router-dom";
 import FixedPlugin from "components/fixedPlugin/FixedPlugin";
 import ResetPassword from "views/auth/UpdatePassword";
+import { Toaster } from "react-hot-toast";
 
 const ResetPasswordLayout = () => {
   return (
     <div>
+        <Toaster
+            position="top-center"
+            reverseOrder={false}
+        />
         <div className="relative float-right h-full min-h-screen w-full !bg-white dark:!bg-navy-900">
           <FixedPlugin />
           <main className={`mx-auto min-h-screen`}>

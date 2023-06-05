@@ -18,8 +18,8 @@ const ForgetPassword = () => {
     e.preventDefault();
     try {
       await resetPassword(email);
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      return;
     }
   };
 

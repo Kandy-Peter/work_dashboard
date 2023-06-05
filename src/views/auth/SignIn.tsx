@@ -1,5 +1,9 @@
-import React, {  useState, useContext } from "react";
-import { Link } from "react-router-dom";
+import React, {  useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+import { Cookies } from "react-cookie";
+
+
 import InputField from "components/fields/InputField";
 import { FcGoogle } from "react-icons/fc";
 import Checkbox from "components/checkbox";
@@ -8,6 +12,9 @@ import { validateEmail, validatePassword } from "utils/InputsValidation";
 
 export default function SignIn() {
   const { login } = useApi();
+  const navigate = useNavigate();
+  const cookies = new Cookies();
+
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState({
@@ -28,12 +35,18 @@ export default function SignIn() {
 
   const handleSubmit: React.MouseEventHandler<HTMLButtonElement> = async (e) => {
     e.preventDefault();
+  
     try {
-      await login(email, password);
-    } catch (error) {
-      console.log(error);
+      const response = await login(email, password);
+      const { token, user } = response.data.data;
+      cookies.set('token', token, { path: '/' });
+      cookies.set('user', user, { path: '/' });
+      navigate('/');
+    } catch (error: any) {
+      console.log(error.response);
+      return;
     }
-  }
+  };
 
   return (
     <div className="mt-16 mb-16 flex h-full w-full items-center justify-center px-2 md:mx-0 md:px-0 lg:mb-10 lg:items-center lg:justify-start">
@@ -100,7 +113,7 @@ export default function SignIn() {
         <button
           className="linear mt-2 w-full rounded-xl bg-brand-500 py-[12px] text-base font-medium text-white transition duration-200 hover:bg-brand-600 active:bg-brand-700 dark:bg-brand-400 dark:text-white dark:hover:bg-brand-300 dark:active:bg-brand-200"
           onClick={handleSubmit}
-          disabled={error ? true : false}
+          // disabled={error ? true : false}
         >
           Sign In
         </button>

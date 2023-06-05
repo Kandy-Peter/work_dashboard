@@ -1,13 +1,17 @@
-import React from "react";
 import ForgetPassword from "views/auth/ForgetPassword";
 import Footer from "components/footer/FooterAuthDefault";
 import authImg from "assets/img/auth/auth.png";
 import { Link } from "react-router-dom";
 import FixedPlugin from "components/fixedPlugin/FixedPlugin";
+import { Toaster } from "react-hot-toast";
 
 const PasswordLayout = () => {
   return (
     <div>
+        <Toaster
+          position="top-center"
+          reverseOrder={false}
+        />
         <div className="relative float-right h-full min-h-screen w-full !bg-white dark:!bg-navy-900">
           <FixedPlugin />
           <main className={`mx-auto min-h-screen`}>

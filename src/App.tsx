@@ -6,9 +6,7 @@ import AdminLayout from "layouts/admin";
 import AuthLayout from "layouts/auth";
 import PasswordLayout from "layouts/auth/forget_password_layout";
 import ResetPasswordLayout from "layouts/auth/reset_password_layout";
-
-
-axios.defaults.baseURL = 'http://127.0.0.1:4000/api/v1';
+import { Toaster } from "react-hot-toast";
 
 const App = () => {
   return (
@@ -18,7 +16,7 @@ const App = () => {
       <Route path="rtl/*" element={<RtlLayout />} />
       <Route path="/" element={<Navigate to="/admin" replace />} />
       <Route path="/password_reset" element={<PasswordLayout />} />
-      <Route path="/password_reset/:token" element={<ResetPasswordLayout />} />
+      <Route path="/password_resets/:token" element={<ResetPasswordLayout />} />
     </Routes>
   );
 };

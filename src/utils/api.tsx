@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { useCookies, Cookies } from 'react-cookie';
 import { useContext, useState } from 'react';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 import { UserContext } from '../context/userContext';
 
@@ -10,23 +12,47 @@ const api = axios.create({
   baseURL: API_URL,
 });
 
+interface ApiResponse<T> {
+  status: {
+    code: number;
+    message: string;
+  };
+  data: T;
+}
+
+const showErrorToast = (message: string) => {
+  toast.error(message);
+};
+
+const showSuccessToast = (message: string) => {
+  toast.success(message);
+};
+
+const showLoadingToast = (message: string) => {
+  return toast.loading(message);
+};
+
+
 export const useApi = () => {
-  const [cookies, setCookie, removeCookie] = useCookies(['token', 'role', 'authenticated']);
+  const [cookies, setCookie, removeCookie] = useCookies(['token', 'role', 'authenticated', 'user']);
   const { setUserInfo, setMessage } = useContext(UserContext);
 
-  const login = async (email: string, password: string) => {
+  const navigate = useNavigate();
+
+  const login = async (email: string, password: string): Promise<ApiResponse<any>> => {
     try {
       // Make the login API request
+      const loadingToast = showLoadingToast('Logging in...');
       const response = await api.post('/auth/login', { email, password });
-
-      // Set the token, role, and authenticated cookies
-      setCookie('token', response.data.token);
-      setCookie('role', response.data.data.role);
-      setCookie('authenticated', true);
-      setUserInfo(response.data.data);
-      setMessage(response.data.status.message);
-    } catch (error) {
-      console.log(error);
+      toast.dismiss(loadingToast);
+      await showSuccessToast(response.data.status.message);
+      navigate('/');
+      return response.data;
+    } catch (error: any) {
+      toast.dismiss();
+      const errorMessage = error.response?.data?.status?.message || 'An error occurred';
+      showErrorToast(errorMessage);
+      throw new Error(errorMessage);
     }
   };
 
@@ -35,21 +61,37 @@ export const useApi = () => {
     removeCookie('token');
     removeCookie('role');
     removeCookie('authenticated');
+    navigate('/auth/sign-in');
   };
 
   const resetPassword = async (email: string) => {
     try {
-      await api.post('/password_resets', { email });
-    } catch (error) {
-      console.log(error)
+      const loadingToast = showLoadingToast('Sending reset password email...');
+      const response = await api.post('/password_resets', { email });
+      toast.dismiss(loadingToast);
+      showSuccessToast(response.data.status.message);
+      return response;
+    } catch (error: any) {
+      toast.dismiss();
+      const errorMessage = error.response?.data?.status?.message || 'An error occurred';
+      showErrorToast(errorMessage);
+      throw new Error(errorMessage);
     }
   };
 
   const updatePassword = async (password: string, password_confirmation: string, token: string) => {
     try {
-      await api.put(`/password_resets/${token}`, { password, password_confirmation });
-    } catch (error) {
-      console.log(error);
+      const loadingToast = showLoadingToast('Updating password...');
+      const response = await api.put(`/password_resets/${token}`, { password, password_confirmation });
+      toast.dismiss(loadingToast);
+      showSuccessToast(response.data.status.message);
+      navigate('/auth/sign-in');
+      return response;
+    } catch (error: any) {
+      toast.dismiss();
+      const errorMessage = error.response?.data?.status?.message || 'An error occurred';
+      showErrorToast(errorMessage);
+      throw new Error(errorMessage);
     }
   };
 
