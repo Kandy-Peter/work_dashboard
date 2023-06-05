@@ -3,6 +3,7 @@ import authImg from "assets/img/auth/auth.png";
 import { Link, Routes, Route, Navigate } from "react-router-dom";
 import routes from "routes";
 import FixedPlugin from "components/fixedPlugin/FixedPlugin";
+import { Toaster } from "react-hot-toast";
 
 export default function Auth() {
   const getRoutes = (routes: RoutesType[]): any => {
@@ -19,6 +20,10 @@ export default function Auth() {
   document.documentElement.dir = "ltr";
   return (
     <div>
+      <Toaster
+          position="top-center"
+          reverseOrder={false}
+      />
       <div className="relative float-right h-full min-h-screen w-full !bg-white dark:!bg-navy-900">
         <FixedPlugin />
         <main className={`mx-auto min-h-screen`}>

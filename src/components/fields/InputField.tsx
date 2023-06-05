@@ -1,6 +1,4 @@
 // Custom components
-import React from "react";
-
 function InputField(props: {
   id: string;
   label: string;
@@ -10,8 +8,11 @@ function InputField(props: {
   state?: string;
   disabled?: boolean;
   type?: string;
+  value?: string;
+  error?: string | null;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }) {
-  const { label, id, extra, type, placeholder, variant, state, disabled } =
+  const { label, id, extra, type, placeholder, variant, state, disabled, value, error, onChange } =
     props;
 
   return (
@@ -29,6 +30,8 @@ function InputField(props: {
         type={type}
         id={id}
         placeholder={placeholder}
+        value={value}
+        onChange={onChange}
         className={`mt-2 flex h-12 w-full items-center justify-center rounded-xl border bg-white/0 p-3 text-sm outline-none ${
           disabled === true
             ? "!border-none !bg-gray-100 dark:!bg-white/5 dark:placeholder:!text-[rgba(255,255,255,0.15)]"
@@ -39,6 +42,9 @@ function InputField(props: {
             : "border-gray-200 dark:!border-white/10 dark:text-white"
         }`}
       />
+      {error && (
+        <p className="text-red-500 text-sm mt-1">{error}</p>
+      )}
     </div>
   );
 }

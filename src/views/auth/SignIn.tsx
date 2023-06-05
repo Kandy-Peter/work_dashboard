@@ -1,8 +1,50 @@
+import React, {  useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+import { Cookies } from "react-cookie";
+
+
 import InputField from "components/fields/InputField";
 import { FcGoogle } from "react-icons/fc";
 import Checkbox from "components/checkbox";
+import { useApi } from "../../utils/api"
+import { validateEmail, validatePassword } from "utils/InputsValidation";
 
 export default function SignIn() {
+  const { login } = useApi();
+  const navigate = useNavigate();
+  const cookies = new Cookies();
+
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [error, setError] = useState({
+    email: "",
+    password: "",
+  })
+
+  /* use react curring to pass the email and password to the login function */
+  const handleChange = (setState: any) => (e: React.ChangeEvent<HTMLInputElement>) => {
+    setState(e.target.value);
+    if (e.target.id === "email") {
+      setError({ ...error, email: validateEmail(e.target.value) })
+    }
+    if (e.target.id === "password") {
+      setError({ ...error, password: validatePassword(e.target.value) })
+    }
+  };
+
+  const handleSubmit: React.MouseEventHandler<HTMLButtonElement> = async (e) => {
+    e.preventDefault();
+  
+    try {
+      await login(email, password);
+      navigate('/');
+    } catch (error: any) {
+      console.log(error.response);
+      return;
+    }
+  };
+
   return (
     <div className="mt-16 mb-16 flex h-full w-full items-center justify-center px-2 md:mx-0 md:px-0 lg:mb-10 lg:items-center lg:justify-start">
       {/* Sign in section */}
@@ -33,7 +75,10 @@ export default function SignIn() {
           label="Email*"
           placeholder="mail@simmmple.com"
           id="email"
-          type="text"
+          type="email"
+          value={email}
+          error={error.email || ""}
+          onChange={handleChange(setEmail)}
         />
 
         {/* Password */}
@@ -44,6 +89,9 @@ export default function SignIn() {
           placeholder="Min. 8 characters"
           id="password"
           type="password"
+          value={password}
+          error={error.password || ""}
+          onChange={handleChange(setPassword)}
         />
         {/* Checkbox */}
         <div className="mb-4 flex items-center justify-between px-2">
@@ -53,14 +101,17 @@ export default function SignIn() {
               Keep me logged In
             </p>
           </div>
-          <a
-            className="text-sm font-medium text-brand-500 hover:text-brand-600 dark:text-white"
-            href=" "
-          >
-            Forgot Password?
-          </a>
+          <Link to="/password_reset">
+            <button className="text-sm font-medium text-brand-500 hover:text-brand-600 dark:text-white" type="button">
+              Forgot Password?
+            </button>
+          </Link>
         </div>
-        <button className="linear mt-2 w-full rounded-xl bg-brand-500 py-[12px] text-base font-medium text-white transition duration-200 hover:bg-brand-600 active:bg-brand-700 dark:bg-brand-400 dark:text-white dark:hover:bg-brand-300 dark:active:bg-brand-200">
+        <button
+          className="linear mt-2 w-full rounded-xl bg-brand-500 py-[12px] text-base font-medium text-white transition duration-200 hover:bg-brand-600 active:bg-brand-700 dark:bg-brand-400 dark:text-white dark:hover:bg-brand-300 dark:active:bg-brand-200"
+          onClick={handleSubmit}
+          // disabled={error ? true : false}
+        >
           Sign In
         </button>
         <div className="mt-4">

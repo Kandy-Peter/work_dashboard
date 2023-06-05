@@ -11,6 +11,8 @@ import {
   IoMdInformationCircleOutline,
 } from "react-icons/io";
 import avatar from "assets/img/avatars/avatar4.png";
+import { UserContext } from "context/userContext";
+import { useApi } from "utils/api";
 
 const Navbar = (props: {
   onOpenSidenav: () => void;
@@ -19,6 +21,21 @@ const Navbar = (props: {
 }) => {
   const { onOpenSidenav, brandText } = props;
   const [darkmode, setDarkmode] = React.useState(false);
+  const { userInfo } = React.useContext(UserContext);
+  const { logout } = useApi();
+
+  const username = userInfo?.username;
+  
+  const handleLogout: React.MouseEventHandler<HTMLButtonElement> = async (e) => {
+    e.preventDefault();
+    try {
+      await logout();
+    }
+    catch (error: any) {
+      console.log(error);
+    }
+  };
+
 
   return (
     <nav className="sticky top-4 z-40 flex flex-row flex-wrap items-center justify-between rounded-xl bg-white/10 p-2 backdrop-blur-xl dark:bg-[#0b14374d]">
@@ -193,7 +210,7 @@ const Navbar = (props: {
               <div className="mt-3 ml-4">
                 <div className="flex items-center gap-2">
                   <p className="text-sm font-bold text-navy-700 dark:text-white">
-                    👋 Hey, Adela
+                    👋 Hey, {username}
                   </p>{" "}
                 </div>
               </div>
@@ -212,12 +229,12 @@ const Navbar = (props: {
                 >
                   Newsletter Settings
                 </a>
-                <a
-                  href=" "
-                  className="mt-3 text-sm font-medium text-red-500 hover:text-red-500"
+                <button
+                  onClick={handleLogout}
+                  className="mt-3 text-sm font-medium text-red-500 hover:text-red-500 outline-none focus:outline-none text-left"
                 >
                   Log Out
-                </a>
+                </button>
               </div>
             </div>
           }
