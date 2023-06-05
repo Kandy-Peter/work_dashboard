@@ -1,6 +1,7 @@
 // Chakra Imports
 // Custom Icons
 import React from "react";
+import { UserContext } from "context/userContext";
 
 import { RiMoonFill, RiSunFill } from "react-icons/ri";
 export default function FixedPlugin(props: { [s: string]: any }) {
@@ -8,6 +9,16 @@ export default function FixedPlugin(props: { [s: string]: any }) {
   const [darkmode, setDarkmode] = React.useState(
     document.body.classList.contains("dark")
   );
+
+  const { setTheme } = React.useContext(UserContext);
+
+  React.useEffect(() => {
+    if (darkmode) {
+      setTheme("dark");
+    } else {
+      setTheme("light");
+    }
+  }, [darkmode]);
 
   return (
     <button

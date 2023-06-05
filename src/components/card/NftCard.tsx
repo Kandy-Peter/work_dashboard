@@ -28,7 +28,7 @@ const NftCard = (props: {
             onClick={() => setHeart(!heart)}
             className="absolute top-3 right-3 flex items-center justify-center rounded-full bg-white p-2 text-cyan-500 hover:cursor-pointer"
           >
-            <div className="flex h-full w-full items-center justify-center rounded-full text-xl hover:bg-gray-50 dark:text-navy-900">
+            <div className="flex h-full w-full items-center justify-center rounded-full text-xl hover:bg-gray-50 dark:text-sky-900">
               {heart ? (
                 <IoHeartOutline />
               ) : (
@@ -40,7 +40,7 @@ const NftCard = (props: {
 
         <div className="mb-3 flex items-center justify-between px-1 md:flex-col md:items-start lg:flex-row lg:justify-between xl:flex-col xl:items-start 3xl:flex-row 3xl:justify-between">
           <div className="mb-2">
-            <p className="text-lg font-bold text-navy-700 dark:text-white">
+            <p className="text-lg font-bold text-sky-700 dark:text-white">
               {" "}
               {title}{" "}
             </p>
@@ -50,13 +50,13 @@ const NftCard = (props: {
           </div>
 
           <div className="flex flex-row-reverse md:mt-2 lg:mt-0">
-            <span className="z-0 ml-px inline-flex h-8 w-8 items-center justify-center rounded-full border-2 border-white bg-[#E0E5F2] text-xs text-navy-700 dark:!border-navy-800 dark:bg-gray-800 dark:text-white">
+            <span className="z-0 ml-px inline-flex h-8 w-8 items-center justify-center rounded-full border-2 border-white bg-[#E0E5F2] text-xs text-sky-700 dark:!border-sky-800 dark:bg-gray-800 dark:text-white">
               +5
             </span>
             {bidders.map((avt, key) => (
               <span
                 key={key}
-                className="z-10 -mr-3 h-8 w-8 rounded-full border-2 border-white dark:!border-navy-800"
+                className="z-10 -mr-3 h-8 w-8 rounded-full border-2 border-white dark:!border-sky-800"
               >
                 <img
                   className="h-full w-full rounded-full object-cover"

@@ -9,7 +9,7 @@ const Project = () => {
   return (
     <Card extra={"w-full p-4 h-full"}>
       <div className="mb-8 w-full">
-        <h4 className="text-xl font-bold text-navy-700 dark:text-white">
+        <h4 className="text-xl font-bold text-sky-700 dark:text-white">
           All projects
         </h4>
         <p className="mt-2 text-base text-gray-600">
@@ -18,13 +18,13 @@ const Project = () => {
         </p>
       </div>
       {/* Project 1 */}
-      <div className="flex w-full items-center justify-between rounded-2xl bg-white p-3 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
+      <div className="flex w-full items-center justify-between rounded-2xl bg-white p-3 shadow-3xl shadow-shadow-500 dark:!bg-sky-700 dark:shadow-none">
         <div className="flex items-center">
           <div className="">
             <img className="h-[83px] w-[83px] rounded-lg" src={image1} alt="" />
           </div>
           <div className="ml-4">
-            <p className="text-base font-medium text-navy-700 dark:text-white">
+            <p className="text-base font-medium text-sky-700 dark:text-white">
               Technology behind the Blockchain
             </p>
             <p className="mt-2 text-sm text-gray-600">
@@ -43,13 +43,13 @@ const Project = () => {
         </div>
       </div>
       {/* Project 1 */}
-      <div className="mt-3 flex w-full items-center justify-between rounded-2xl bg-white p-3 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
+      <div className="mt-3 flex w-full items-center justify-between rounded-2xl bg-white p-3 shadow-3xl shadow-shadow-500 dark:!bg-sky-700 dark:shadow-none">
         <div className="flex items-center">
           <div className="">
             <img className="h-[83px] w-[83px] rounded-lg" src={image3} alt="" />
           </div>
           <div className="ml-4">
-            <p className="text-base font-medium text-navy-700 dark:text-white">
+            <p className="text-base font-medium text-sky-700 dark:text-white">
               Technology behind the Blockchain
             </p>
             <p className="mt-2 text-sm text-gray-600">
@@ -68,13 +68,13 @@ const Project = () => {
         </div>
       </div>
       {/* Project 1 */}
-      <div className="mt-3 flex w-full items-center justify-between rounded-2xl bg-white p-3 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
+      <div className="mt-3 flex w-full items-center justify-between rounded-2xl bg-white p-3 shadow-3xl shadow-shadow-500 dark:!bg-sky-700 dark:shadow-none">
         <div className="flex items-center">
           <div className="">
             <img className="h-[83px] w-[83px] rounded-lg" src={image2} alt="" />
           </div>
           <div className="ml-4">
-            <p className="text-base font-medium text-navy-700 dark:text-white">
+            <p className="text-base font-medium text-sky-700 dark:text-white">
               Technology behind the Blockchain
             </p>
             <p className="mt-2 text-sm text-gray-600">

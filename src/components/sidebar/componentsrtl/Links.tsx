@@ -41,7 +41,7 @@ export function SidebarLinks(props: { routes: RoutesType[] }) {
                 <p
                   className={`leading-1 flex ms-4 ${
                     activeRoute(route.path) === true
-                      ? "font-bold text-navy-700 dark:text-white"
+                      ? "font-bold text-sky-700 dark:text-white"
                       : "font-medium text-gray-600"
                   }`}
                 >

@@ -36,7 +36,7 @@ function CheckTable(props: { tableData: any }) {
               alt=""
             />
           </div>
-          <p className="text-sm font-medium text-navy-700 dark:text-white">
+          <p className="text-sm font-medium text-sky-700 dark:text-white">
             {info.getValue()[0]}
           </p>
         </div>
@@ -84,7 +84,7 @@ function CheckTable(props: { tableData: any }) {
   return (
     <Card extra={"w-full h-full sm:overflow-auto px-6"}>
       <header className="relative flex items-center justify-between pt-4">
-        <div className="text-xl font-bold text-navy-700 dark:text-white">
+        <div className="text-xl font-bold text-sky-700 dark:text-white">
           Check Table
         </div>
 

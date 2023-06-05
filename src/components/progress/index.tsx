@@ -7,7 +7,7 @@ const Progress = (props: {
     | "yellow"
     | "orange"
     | "teal"
-    | "navy"
+    | "sky"
     | "lime"
     | "cyan"
     | "pink"
@@ -22,7 +22,7 @@ const Progress = (props: {
     <div
       className={`h-2 ${
         width ? width : "w-full"
-      } rounded-full bg-gray-200 dark:bg-navy-700`}
+      } rounded-full bg-gray-200 dark:bg-sky-700`}
     >
       <div
         className={`flex h-full items-center justify-center rounded-full ${
@@ -38,8 +38,8 @@ const Progress = (props: {
             ? "bg-orange-500 dark:bg-orange-400"
             : color === "teal"
             ? "bg-teal-500 dark:bg-teal-400"
-            : color === "navy"
-            ? "bg-navy-500 dark:bg-navy-400"
+            : color === "sky"
+            ? "bg-sky-500 dark:bg-sky-400"
             : color === "lime"
             ? "bg-lime-500 dark:bg-lime-400"
             : color === "cyan"
