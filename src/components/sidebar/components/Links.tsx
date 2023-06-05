@@ -32,7 +32,7 @@ export const SidebarLinks = (props: { routes: RoutesType[] }): JSX.Element => {
                 <span
                   className={`${
                     activeRoute(route.path) === true
-                      ? "font-bold text-brand-500 dark:text-white"
+                      ? "font-bold text-cyan-500 dark:text-white"
                       : "font-medium text-gray-600"
                   }`}
                 >
@@ -49,7 +49,7 @@ export const SidebarLinks = (props: { routes: RoutesType[] }): JSX.Element => {
                 </p>
               </li>
               {activeRoute(route.path) ? (
-                <div className="absolute right-0 top-px h-9 w-1 rounded-lg bg-brand-500 dark:bg-brand-400" />
+                <div className="absolute right-0 top-px h-9 w-1 rounded-lg bg-cyan-500 dark:bg-cyan-400" />
               ) : null}
             </div>
           </Link>
@@ -57,7 +57,7 @@ export const SidebarLinks = (props: { routes: RoutesType[] }): JSX.Element => {
       }
     });
   };
-  // BRAND
+  // cyan
   return <>{createLinks(routes)}</>;
 };
 

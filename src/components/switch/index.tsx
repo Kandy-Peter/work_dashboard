@@ -54,7 +54,7 @@ const Switch = (props: {
           ? "checked:bg-indigo-500 dark:checked:bg-indigo-400"
           : color === "gray"
           ? "checked:bg-gray-500 dark:checked:bg-gray-400"
-          : "checked:bg-brand-500 dark:checked:bg-brand-400"
+          : "checked:bg-cyan-500 dark:checked:bg-cyan-400"
       } ${extra}`}
       name="weekly"
       {...rest}

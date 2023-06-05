@@ -69,7 +69,7 @@ export default function RTL() {
           <div className="h-full">
             <Navbar
               onOpenSidenav={() => setOpen(true)}
-              brandText={currentRoute}
+              cyanText={currentRoute}
               secondary={getActiveNavbar(routes)}
             />
             <div className="pt-5s mx-auto mb-auto h-full min-h-[84vh] p-2 md:pr-2">

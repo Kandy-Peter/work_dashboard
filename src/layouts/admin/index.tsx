@@ -70,7 +70,7 @@ export default function Admin(props: { [x: string]: any }) {
           <div className="h-full">
             <Navbar
               onOpenSidenav={() => setOpen(true)}
-              brandText={currentRoute}
+              cyanText={currentRoute}
               secondary={getActiveNavbar(routes)}
               {...rest}
             />

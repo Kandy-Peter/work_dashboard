@@ -16,10 +16,10 @@ import { useApi } from "utils/api";
 
 const Navbar = (props: {
   onOpenSidenav: () => void;
-  brandText: string;
+  cyanText: string;
   secondary?: boolean | string;
 }) => {
-  const { onOpenSidenav, brandText } = props;
+  const { onOpenSidenav, cyanText } = props;
   const [darkmode, setDarkmode] = React.useState(false);
   const { userInfo } = React.useContext(UserContext);
   const { logout } = useApi();
@@ -55,7 +55,7 @@ const Navbar = (props: {
             className="text-sm font-normal capitalize text-navy-700 hover:underline dark:text-white dark:hover:text-white"
             to="#"
           >
-            {brandText}
+            {cyanText}
           </Link>
         </div>
         <p className="shrink text-[33px] capitalize text-navy-700 dark:text-white">
@@ -63,7 +63,7 @@ const Navbar = (props: {
             to="#"
             className="font-bold capitalize hover:text-navy-700 dark:hover:text-white"
           >
-            {brandText}
+            {cyanText}
           </Link>
         </p>
       </div>
@@ -105,7 +105,7 @@ const Navbar = (props: {
               </div>
 
               <button className="flex w-full items-center">
-                <div className="flex h-full w-[85px] items-center justify-center rounded-xl bg-gradient-to-b from-brandLinear to-brand-500 py-4 text-2xl text-white">
+                <div className="flex h-full w-[85px] items-center justify-center rounded-xl bg-gradient-to-b from-cyanLinear to-cyan-500 py-4 text-2xl text-white">
                   <BsArrowBarUp />
                 </div>
                 <div className="ml-2 flex h-full w-full flex-col justify-center rounded-lg px-1 text-sm">
@@ -119,7 +119,7 @@ const Navbar = (props: {
               </button>
 
               <button className="flex w-full items-center">
-                <div className="flex h-full w-[85px] items-center justify-center rounded-xl bg-gradient-to-b from-brandLinear to-brand-500 py-4 text-2xl text-white">
+                <div className="flex h-full w-[85px] items-center justify-center rounded-xl bg-gradient-to-b from-cyanLinear to-cyan-500 py-4 text-2xl text-white">
                   <BsArrowBarUp />
                 </div>
                 <div className="ml-2 flex h-full w-full flex-col justify-center rounded-lg px-1 text-sm">
@@ -155,7 +155,7 @@ const Navbar = (props: {
               <a
                 target="blank"
                 href="https://horizon-ui.com/pro?ref=live-free-tailwind-react"
-                className="px-full linear flex cursor-pointer items-center justify-center rounded-xl bg-brand-500 py-[11px] font-bold text-white transition duration-200 hover:bg-brand-600 hover:text-white active:bg-brand-700 dark:bg-brand-400 dark:hover:bg-brand-300 dark:active:bg-brand-200"
+                className="px-full linear flex cursor-pointer items-center justify-center rounded-xl bg-cyan-500 py-[11px] font-bold text-white transition duration-200 hover:bg-cyan-600 hover:text-white active:bg-cyan-700 dark:bg-cyan-400 dark:hover:bg-cyan-300 dark:active:bg-cyan-200"
               >
                 Buy Horizon UI PRO
               </a>

@@ -28,7 +28,7 @@ const Marketplace = () => {
           <ul className="mt-4 flex items-center justify-between md:mt-0 md:justify-center md:!gap-5 2xl:!gap-12">
             <li>
               <a
-                className="text-base font-medium text-brand-500 hover:text-brand-500 dark:text-white"
+                className="text-base font-medium text-cyan-500 hover:text-cyan-500 dark:text-white"
                 href=" "
               >
                 Art
@@ -36,7 +36,7 @@ const Marketplace = () => {
             </li>
             <li>
               <a
-                className="text-base font-medium text-brand-500 hover:text-brand-500 dark:text-white"
+                className="text-base font-medium text-cyan-500 hover:text-cyan-500 dark:text-white"
                 href=" "
               >
                 Music
@@ -44,7 +44,7 @@ const Marketplace = () => {
             </li>
             <li>
               <a
-                className="text-base font-medium text-brand-500 hover:text-brand-500 dark:text-white"
+                className="text-base font-medium text-cyan-500 hover:text-cyan-500 dark:text-white"
                 href=" "
               >
                 Collection
@@ -52,7 +52,7 @@ const Marketplace = () => {
             </li>
             <li>
               <a
-                className="text-base font-medium text-brand-500 hover:text-brand-500 dark:text-white"
+                className="text-base font-medium text-cyan-500 hover:text-cyan-500 dark:text-white"
                 href=" "
               >
                 <a href=" ">Sports</a>
