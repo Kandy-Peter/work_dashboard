@@ -121,11 +121,65 @@ export const useApi = () => {
     }
   };
 
+  const getUserInfo = async (token: string) => {
+    try {
+      const response = await api.get('/:organization_id/profile', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const { data: responseData } = response.data;
+      return responseData;
+    } catch (error: any) {
+      const errorMessage = error.response?.data?.status?.message || 'An error occurred';
+      showErrorToast(errorMessage);
+      throw new Error(errorMessage);
+    }
+  };
+
+  const updateUserInfo = async (data: any, token: string) => {
+    try {
+      const response = await api.put('/:organization_id/profile', data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const { data: responseData } = response.data;
+      showSuccessToast(response.data.status.message);
+      return responseData;
+    } catch (error: any) {
+      const errorMessage = error.response?.data?.status?.message || 'An error occurred';
+      showErrorToast(errorMessage);
+      throw new Error(errorMessage);
+    }
+  };
+
+  const updateRole = async (data: any, token: string) => {
+    try {
+      const response = await api.put('/:organization_id/role', data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const { data: responseData } = response.data;
+      showSuccessToast(response.data.status.message);
+      return responseData;
+
+    } catch (error: any) {
+      const errorMessage = error.response?.data?.status?.message || 'An error occurred';
+      showErrorToast(errorMessage);
+      throw new Error(errorMessage);
+    }
+  };
+
   return {
     login,
     logout,
     resetPassword,
     updatePassword,
+    getUserInfo,
+    updateUserInfo,
+    updateRole,
   };
 };
 
