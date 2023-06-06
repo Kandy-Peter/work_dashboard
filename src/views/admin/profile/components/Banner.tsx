@@ -1,8 +1,11 @@
-import avatar from "assets/img/avatars/avatar11.png";
 import banner from "assets/img/profile/banner.png";
 import Card from "components/card";
 
-const Banner = () => {
+const Banner = ({avatar, lastName, firstName, role, bio}: BannerProps) => {
+  const capitalizeFirstLetter = (string: string) => {
+    if (string === undefined) return;
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
   return (
     <Card extra={"items-center w-full h-full p-[16px] bg-cover"}>
       {/* Background and profile */}
@@ -18,9 +21,9 @@ const Banner = () => {
       {/* Name and position */}
       <div className="mt-16 flex flex-col items-center">
         <h4 className="text-xl font-bold text-sky-700 dark:text-white">
-          Adela Parkson
+          {capitalizeFirstLetter(firstName)} {capitalizeFirstLetter(lastName)}
         </h4>
-        <p className="text-base font-normal text-gray-600">Product Manager</p>
+        <p className="text-base font-normal text-gray-600">{role}</p>
       </div>
 
       {/* Post followers */}

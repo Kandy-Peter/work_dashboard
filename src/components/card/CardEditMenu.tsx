@@ -1,12 +1,9 @@
 import React from "react";
 import Dropdown from "components/dropdown";
-import { AiOutlineUser } from "react-icons/ai";
 import { BsThreeDots } from "react-icons/bs";
-import { FiSettings } from "react-icons/fi";
-import { AiOutlineShop, AiFillEdit } from "react-icons/ai";
-import { TiLightbulb } from "react-icons/ti";
+import { AiFillEdit } from "react-icons/ai";
 
-function CardMenu(props: { transparent?: boolean }) {
+function CardEditMenu(props: { transparent?: boolean }) {
   const { transparent } = props;
   const [open, setOpen] = React.useState(false);
   return (
@@ -33,28 +30,10 @@ function CardMenu(props: { transparent?: boolean }) {
             </span>
             Edit
           </button>
-          <p className="hover:text-black mt-2 flex cursor-pointer items-center gap-2 pt-1 text-gray-600 hover:font-medium">
-            <span>
-              <AiOutlineShop />
-            </span>
-            Panel 2
-          </p>
-          <p className="hover:text-black mt-2 flex cursor-pointer items-center gap-2 pt-1 text-gray-600 hover:font-medium">
-            <span>
-              <TiLightbulb />
-            </span>
-            Panel 3
-          </p>
-          <p className="hover:text-black mt-2 flex cursor-pointer items-center gap-2 pt-1 text-gray-600 hover:font-medium">
-            <span>
-              <FiSettings />
-            </span>
-            Panel 4
-          </p>
         </div>
       }
     />
   );
 }
 
-export default CardMenu;
+export default CardEditMenu;

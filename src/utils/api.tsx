@@ -1,14 +1,11 @@
-import axios from 'axios';
-import { useCookies} from 'react-cookie';
-import { useContext } from 'react';
-import toast from 'react-hot-toast';
-import { useNavigate } from 'react-router-dom';
-
-import { UserContext } from '../context/userContext';
+import axios from "axios";
+import { useCookies } from "react-cookie";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
-const api = axios.create({
+export const api = axios.create({
   baseURL: API_URL,
 });
 
@@ -35,22 +32,34 @@ const showLoadingToast = (message: string) => {
 const MAX_COOKIE_AGE = 24 * 60 * 60; // 24 hours
 
 export const useApi = () => {
-  const validCookieNames = ['token', 'role', 'authenticated', 'avatar', 'username'];
+  const validCookieNames = [
+    "token",
+    "role",
+    "authenticated",
+    "avatar",
+    "username",
+    "organization_id",
+    "slug",
+    "name",
+  ];
   const [cookies, setCookie, removeCookie] = useCookies(validCookieNames);
-  const { setUserInfo } = useContext(UserContext);
 
   const navigate = useNavigate();
 
-  const login = async (email: string, password: string): Promise<ApiResponse<any>> => {
+  const login = async (
+    email: string,
+    password: string
+  ): Promise<ApiResponse<any>> => {
     try {
       // Make the login API request
-      const loadingToast = showLoadingToast('Logging in...');
-      const response = await api.post('/auth/login', { email, password });
+      const loadingToast = showLoadingToast("Logging in...");
+      const response = await api.post("/auth/login", { email, password });
       toast.dismiss(loadingToast);
       await showSuccessToast(response.data.status.message);
-      
-      const { token, data } = response.data
-      const { role, avatar, username } = response.data.data;
+
+      const { token } = response.data;
+      const { role, avatar, username, organization_id } = response.data.data;
+      const { slug, name } = response.data.data.organization;
 
       const cookiesValues = {
         token,
@@ -58,6 +67,9 @@ export const useApi = () => {
         authenticated: true,
         avatar,
         username,
+        organization_id,
+        slug,
+        name,
       };
 
       // Set the token, role, and authenticated cookies
@@ -68,11 +80,12 @@ export const useApi = () => {
         });
       });
 
-      navigate('/');
+      navigate("/");
       return response.data;
     } catch (error: any) {
       toast.dismiss();
-      const errorMessage = error.response?.data?.status?.message || 'An error occurred';
+      const errorMessage =
+        error.response?.data?.status?.message || "An error occurred";
       showErrorToast(errorMessage);
       throw new Error(errorMessage);
     }
@@ -80,83 +93,95 @@ export const useApi = () => {
 
   const logout = () => {
     // Remove the token, role, and authenticated cookies
-    removeCookie('token');
-    removeCookie('role');
-    removeCookie('authenticated');
-    removeCookie('avatar');
-    removeCookie('username');
-  
-    navigate('/auth/sign-in');
+    Object.keys(cookies).forEach((key) => {
+      removeCookie(key);
+    });
+
+    navigate("/auth/sign-in");
     window.location.reload();
   };
 
   const resetPassword = async (email: string) => {
     try {
-      const loadingToast = showLoadingToast('Sending reset password email...');
-      const response = await api.post('/password_resets', { email });
+      const loadingToast = showLoadingToast("Sending reset password email...");
+      const response = await api.post("/password_resets", { email });
       toast.dismiss(loadingToast);
       showSuccessToast(response.data.status.message);
       return response;
     } catch (error: any) {
       toast.dismiss();
-      const errorMessage = error.response?.data?.status?.message || 'An error occurred';
+      const errorMessage =
+        error.response?.data?.status?.message || "An error occurred";
       showErrorToast(errorMessage);
       throw new Error(errorMessage);
     }
   };
 
-  const updatePassword = async (password: string, password_confirmation: string, token: string) => {
+  const updatePassword = async (
+    password: string,
+    password_confirmation: string,
+    token: string
+  ) => {
     try {
-      const loadingToast = showLoadingToast('Updating password...');
-      const response = await api.put(`/password_resets/${token}`, { password, password_confirmation });
+      const loadingToast = showLoadingToast("Updating password...");
+      const response = await api.put(`/password_resets/${token}`, {
+        password,
+        password_confirmation,
+      });
       toast.dismiss(loadingToast);
       showSuccessToast(response.data.status.message);
-      navigate('/auth/sign-in');
+      navigate("/auth/sign-in");
       return response;
     } catch (error: any) {
       toast.dismiss();
-      const errorMessage = error.response?.data?.status?.message || 'An error occurred';
+      const errorMessage =
+        error.response?.data?.status?.message || "An error occurred";
       showErrorToast(errorMessage);
       throw new Error(errorMessage);
     }
   };
 
-  const getUserInfo = async (token: string) => {
+  const getUserProfile = async (token: string, organization_id = "bernier-klocko-and-bernier") => {
     try {
-      const response = await api.get('/:organization_id/profile', {
+      const response = await api.get(`/${organization_id}/profile`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
+
+      console.log(token)
       const { data: responseData } = response.data;
+
       return responseData;
     } catch (error: any) {
-      const errorMessage = error.response?.data?.status?.message || 'An error occurred';
+      const errorMessage =
+        error.response?.data?.status?.message || "An error occurred";
       showErrorToast(errorMessage);
       throw new Error(errorMessage);
     }
   };
 
-  const updateUserInfo = async (data: any, token: string) => {
-    try {
-      const response = await api.put('/:organization_id/profile', data, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const { data: responseData } = response.data;
-      showSuccessToast(response.data.status.message);
-      return responseData;
-    } catch (error: any) {
-      const errorMessage = error.response?.data?.status?.message || 'An error occurred';
-      showErrorToast(errorMessage);
-      throw new Error(errorMessage);
-    }
-  };
+  // const updateUserInfo = async (data: any, token: string) => {
+  //   try {
+  //     const response = await api.put("/:organization_id/profile", data, {
+  //       headers: {
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //     });
+  //     const { data: responseData } = response.data;
+  //     showSuccessToast(response.data.status.message);
+  //     return responseData;
+  //   } catch (error: any) {
+  //     const errorMessage =
+  //       error.response?.data?.status?.message || "An error occurred";
+  //     showErrorToast(errorMessage);
+  //     throw new Error(errorMessage);
+  //   }
+  // };
 
   const updateRole = async (data: any, token: string) => {
     try {
-      const response = await api.put('/:organization_id/role', data, {
+      const response = await api.put("/:organization_id/role", data, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -164,9 +189,9 @@ export const useApi = () => {
       const { data: responseData } = response.data;
       showSuccessToast(response.data.status.message);
       return responseData;
-
     } catch (error: any) {
-      const errorMessage = error.response?.data?.status?.message || 'An error occurred';
+      const errorMessage =
+        error.response?.data?.status?.message || "An error occurred";
       showErrorToast(errorMessage);
       throw new Error(errorMessage);
     }
@@ -177,8 +202,8 @@ export const useApi = () => {
     logout,
     resetPassword,
     updatePassword,
-    getUserInfo,
-    updateUserInfo,
+    getUserProfile,
+    // updateUserInfo,
     updateRole,
   };
 };

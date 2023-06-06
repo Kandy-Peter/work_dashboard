@@ -1,35 +1,33 @@
 import Card from "components/card";
-import CardMenu from "components/card/CardMenu";
-import { BsCloudCheck } from "react-icons/bs";
-const Storage = () => {
+
+const Storage = ({postion, department, department2, employment_date, employee_id, branch}: BannerProps) => {
   return (
     <Card extra={"w-full h-full p-4"}>
-      <div className="ml-auto">
-        <CardMenu />
-      </div>
-      {/* Your storage */}
-      <div className="mb-auto flex flex-col items-center justify-center">
-        <div className="mt-2 flex items-center justify-center rounded-full bg-lightPrimary p-[26px] text-5xl font-bold text-cyan-500 dark:!bg-sky-700 dark:text-white">
-          <BsCloudCheck />
-        </div>
-        <h4 className="mb-px mt-3 text-2xl font-bold text-sky-700 dark:text-white">
-          Your storage
+      <div className="mb-8 mt-2 w-full">
+        <h4 className="px-2 text-xl font-bold text-sky-700 dark:text-white">
+          Employee Informations
         </h4>
-        <p className="px-5 text-center text-base font-normal text-gray-600 md:!px-0 xl:!px-8">
-          Supervise your drive space in the easiest way
-        </p>
       </div>
 
-      {/* Progress bar */}
-
-      <div className="flex flex-col">
-        <div className="flex justify-between">
-          <p className="text-sm font-medium text-gray-600">25.6 GB</p>
-          <p className="text-sm font-medium text-gray-600">50 GB</p>
-        </div>
-        <div className="mt-2 flex h-3 w-full items-center rounded-full bg-lightPrimary dark:!bg-sky-700">
-          <span className="h-full w-1/2 rounded-full bg-cyan-500 dark:!bg-white" />
-        </div>
+      <div className="grid grid-cols-1 gap-5 px-2">
+          <p className="text-sm font-medium text-gray-600 dark:text-white">
+            Branch: <span className="text-sm ml-2 text-gray-700 dark:text-white">{branch}</span>
+          </p>
+          <p className="text-sm font-medium text-gray-600 dark:text-white">
+            Position: <span className="text-sm ml-2 my-4 text-gray-700 dark:text-white">{postion}</span>
+          </p>
+          <p className="text-sm font-medium text-gray-600 dark:text-white">
+            Department: <span className="text-sm ml-2 text-gray-700 dark:text-white">{department}</span>
+          </p>
+          <p className="text-sm font-medium text-gray-600 dark:text-white">
+            Second Department: <span className="text-sm ml-2 text-gray-700 dark:text-white">{department2}</span>
+          </p>
+          <p className="text-sm font-medium text-gray-600 dark:text-white">
+            Employment date: <span className="text-sm ml-2 text-gray-700 dark:text-white">{employment_date}</span>
+          </p>
+          <p className="text-sm font-medium text-gray-600 dark:text-white">
+            Employee ID: <span className="text-sm ml-2 text-gray-700 dark:text-white">{employee_id}</span>
+          </p>
       </div>
     </Card>
   );
