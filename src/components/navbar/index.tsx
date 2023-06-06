@@ -10,7 +10,7 @@ import {
   IoMdNotificationsOutline,
   IoMdInformationCircleOutline,
 } from "react-icons/io";
-import { UserContext } from "context/userContext";
+import { useCookies } from "react-cookie";
 import { useApi } from "utils/api";
 
 const Navbar = (props: {
@@ -20,12 +20,9 @@ const Navbar = (props: {
 }) => {
   const { onOpenSidenav, cyanText } = props;
   const [darkmode, setDarkmode] = React.useState(false);
-  const { userInfo } = React.useContext(UserContext);
   const { logout } = useApi();
 
-  const username = userInfo?.username;
-  const userAvatar = userInfo?.avatar;
-  console.log(userInfo)
+  const [ cookies ] = useCookies(["username", "avatar"]);
   
   const handleLogout: React.MouseEventHandler<HTMLButtonElement> = async (e) => {
     e.preventDefault();
@@ -194,16 +191,16 @@ const Navbar = (props: {
           button={
             <img
               className="h-10 w-10 rounded-full"
-              src={userAvatar}
-              alt={username}
+              src={cookies.avatar}
+              alt={cookies.username}
             />
           }
           children={
             <div className="flex h-48 w-56 flex-col justify-start rounded-[20px] bg-white bg-cover bg-no-repeat shadow-xl shadow-shadow-500 dark:!bg-sky-700 dark:text-white dark:shadow-none">
               <div className="mt-3 ml-4">
                 <div className="flex items-center gap-2">
-                  <p className="text-sm font-bold text-sky-700 dark:text-white">
-                    👋 Hey, {username}
+                  <p className="text-sm font-bold text-navy-700 dark:text-white">
+                    👋 Hey, {cookies.username}
                   </p>{" "}
                 </div>
               </div>

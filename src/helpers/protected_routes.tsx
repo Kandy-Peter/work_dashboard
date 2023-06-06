@@ -1,4 +1,4 @@
-import {  Route, Routes, RouteProps, Navigate } from 'react-router-dom';
+import {  RouteProps, Navigate } from 'react-router-dom';
 import React from 'react';
 import { useCookies } from 'react-cookie';
 import jwt_decode from 'jwt-decode';
