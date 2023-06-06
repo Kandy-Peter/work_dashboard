@@ -32,9 +32,11 @@ const showLoadingToast = (message: string) => {
   return toast.loading(message);
 };
 
+const MAX_COOKIE_AGE = 24 * 60 * 60; // 24 hours
 
 export const useApi = () => {
-  const [cookies, setCookie, removeCookie] = useCookies(['token', 'role', 'authenticated']);
+  const validCookieNames = ['token', 'role', 'authenticated', 'avatar', 'username'];
+  const [cookies, setCookie, removeCookie] = useCookies(validCookieNames);
   const { setUserInfo } = useContext(UserContext);
 
   const navigate = useNavigate();
@@ -48,12 +50,23 @@ export const useApi = () => {
       await showSuccessToast(response.data.status.message);
       
       const { token, data } = response.data
-      const { role } = response.data.data;
+      const { role, avatar, username } = response.data.data;
 
-      setCookie('token', token);
-      setCookie('role', role);
-      setCookie('authenticated', true);
-      setUserInfo(data);
+      const cookiesValues = {
+        token,
+        role,
+        authenticated: true,
+        avatar,
+        username,
+      };
+
+      // Set the token, role, and authenticated cookies
+      Object.entries(cookiesValues).forEach(([key, value]) => {
+        setCookie(key, value, {
+          maxAge: MAX_COOKIE_AGE,
+          sameSite: true,
+        });
+      });
 
       navigate('/');
       return response.data;
@@ -70,7 +83,9 @@ export const useApi = () => {
     removeCookie('token');
     removeCookie('role');
     removeCookie('authenticated');
-    setUserInfo(null);
+    removeCookie('avatar');
+    removeCookie('username');
+  
     navigate('/auth/sign-in');
     window.location.reload();
   };
@@ -115,4 +130,3 @@ export const useApi = () => {
 };
 
 export default api;
-
