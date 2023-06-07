@@ -79,7 +79,7 @@ declare global {
 		gender?: string,
 		phone_number?: string,
 		address?: string,
-		zip_code?: string,
+		zip?: string,
 		personal_email?: string,
 		postion?: string,
 		department?: string,
@@ -91,5 +91,8 @@ declare global {
 		avatar?: string,
 		employee_id?: string,
 		branch?: string,
+		showModal?: boolean;
+		handleClose?: () => void;
+		handleOpen?: () => void;
 	}
 }

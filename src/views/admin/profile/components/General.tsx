@@ -1,5 +1,12 @@
+import React, { useState } from "react";
+import toast from "react-hot-toast";
 import Card from "components/card";
 import CardEditMenu from "components/card/CardEditMenu";
+import CardSaveMenu from "components/card/CardSaveMenu";
+import readOrEditInputInput from "components/fields/ReadInputOrText";
+import readOrEditInput from "components/fields/ReadInputOrText";
+
+
 const General = ({
   education,
   university,
@@ -15,21 +22,78 @@ const General = ({
   gender,
   phone_number,
   address,
-  zip_code,
+  zip,
   personal_email,
   email,
 }: BannerProps) => {
+  // make the card editable for the user to update his information
+  const [isEditable, setIsEditable] = useState(false);
+  const [userData, setUserData] = useState({
+    education,
+    university,
+    field_of_study,
+    bio,
+    birthday,
+    marital_status,
+    phone_number,
+    address,
+    zip,
+    gender,
+    country: country,
+    personal_email,
+    city: { name: city },
+    national_id,
+    nationality,
+  });
+
+  function handleUpdate() {
+    // send the data to the backend
+    // if the request is successful, update the state
+    // if not, show an error message
+    console.log(userData);
+  }
+
+  const handleEdit = () => {
+    setIsEditable(true);
+  };
+
+  const handleCancel = () => {
+    setIsEditable(false);
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setUserData((prevValues) => ({
+      ...prevValues,
+      [name]: value,
+    }));
+  };
+
+  const handleSave = () => {
+    toast.loading("Updating...");
+    setIsEditable(false);
+    handleUpdate();
+    toast.dismiss();
+    toast.success("Updated successfully");
+  };
+
   return (
     <Card extra={"w-full h-full p-3"}>
-      <div className="ml-auto">
-        <CardEditMenu />
+      <div className="ml-auto border-green-200 dark:border-gray-700">
+        {!isEditable ? <CardEditMenu onEdit={handleEdit} />
+        :
+        <CardSaveMenu onCancel={handleCancel} onSave={handleSave}/>
+        }
       </div>
       {/* Header */}
       <div className="mb-8 mt-2 w-full">
         <h4 className="px-2 text-xl font-bold text-sky-700 dark:text-white">
           General Information
         </h4>
-        <p className="mt-2 px-2 text-base text-gray-600">Bio: {bio}</p>
+        <p className="mt-2 px-2 text-base text-gray-600">
+          Bio:
+          {readOrEditInputInput(isEditable, userData.bio, handleChange)}
+        </p>
       </div>
       {/* Cards */}
       <div className="grid grid-cols-2 gap-4 px-2">
@@ -37,38 +101,48 @@ const General = ({
           <p className="text-sm text-sky-800 mb-2">Personal Informations:</p>
 
           <p className="text-sm font-medium text-gray-600 dark:text-white">
-            Age: <span className="text-sm ml-2 text-gray-700 dark:text-white">{age}</span>
+            Age:
+            <span className="text-sm ml-2 text-gray-700 dark:text-white">{age}</span>
           </p>
           <p className="text-sm font-medium text-gray-600 dark:text-white">
-            Birthday: <span className="text-sm ml-2 text-gray-700 dark:text-white">{birthday}</span>
+            Birthday:
+            {readOrEditInput(isEditable, userData.birthday, handleChange)}
           </p>
           <p className="text-sm font-medium text-gray-600 dark:text-white">
-            Marital Status: <span className="text-sm ml-2 text-gray-700 dark:text-white">{marital_status}</span>
+            Marital Status:
+            {readOrEditInput(isEditable, userData.marital_status, handleChange)}
           </p>
           <p className="text-sm font-medium text-gray-600 dark:text-white">
-            Gender: <span className="text-sm ml-2 text-gray-700 dark:text-white">{gender}</span>
+            Gender:
+            {readOrEditInput(isEditable, userData.gender, handleChange)}
           </p>
         </div>
 
         <div className="flex flex-col justify-center rounded-2xl bg-white bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-sky-700 dark:shadow-none">
           <p className="text-sm text-sky-800 mb-2">Identity</p>
           <p className="text-sm font-medium text-gray-600 dark:text-white">
-            Country: <span className="text-sm ml-2 text-gray-700 dark:text-white">{country}</span>
+            Country:
+            {readOrEditInput(isEditable, userData.country, handleChange)}
           </p>
           <p className="text-sm font-medium text-gray-600 dark:text-white">
-            City: <span className="text-sm ml-2 text-gray-700 dark:text-white">{city}</span>
+            City:
+            {readOrEditInput(isEditable, userData.city.name, handleChange)}
           </p>
           <p className="text-sm font-medium text-gray-600 dark:text-white">
-            Nationality: <span className="text-sm ml-2 text-gray-700 dark:text-white">{nationality}</span>
+            Nationality:
+            {readOrEditInput(isEditable, userData.nationality, handleChange)}
           </p>
           <p className="text-sm font-medium text-gray-600 dark:text-white">
-            National ID: <span className="text-sm ml-2 text-gray-700 dark:text-white">{national_id}</span>
+            National ID: 
+            {readOrEditInput(isEditable, userData.national_id, handleChange)}
           </p>
           <p className="text-sm font-medium text-gray-600 dark:text-white">
-            Address: <span className="text-sm ml-2 text-gray-700 dark:text-white">{address}</span>
+            Address:
+            {readOrEditInput(isEditable, userData.address, handleChange)}
           </p>
           <p className="text-sm font-medium text-gray-600 dark:text-white">
-            Zip: <span className="text-sm ml-2 text-gray-700 dark:text-white">{zip_code}</span>
+            Zip:
+            {readOrEditInput(isEditable, userData.zip, handleChange)}
           </p>
         </div>
 
@@ -78,23 +152,28 @@ const General = ({
             Work Email: <span className="text-sm ml-2 text-gray-700 dark:text-white">{email}</span>
           </p>
           <p className="text-sm font-medium text-gray-600 dark:text-white">
-            Personal Email: <span className="text-sm ml-2 text-gray-700 dark:text-white">{personal_email}</span>
+            Personal Email:
+            {readOrEditInput(isEditable, userData.personal_email, handleChange)}
           </p>
           <p className="text-sm font-medium text-gray-600 dark:text-white">
-            Phone Number: <span className="text-sm ml-2 text-gray-700 dark:text-white">{phone_number}</span>
+            Phone Number:
+            {readOrEditInput(isEditable, userData.phone_number, handleChange)}
           </p>
         </div>
 
         <div className="flex flex-col items-start justify-center rounded-2xl bg-white bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-sky-700 dark:shadow-none">
           <p className="text-sm text-sky-800 mb-2">Education</p>
           <p className="text-sm font-medium text-gray-600 dark:text-white">
-            Level: <span className="text-sm ml-2 text-gray-700 dark:text-white">{education}</span>
+            Level:
+            {readOrEditInput(isEditable, userData.education, handleChange)}
           </p>
           <p className="text-sm font-medium text-gray-600 dark:text-white">
-            University: <span className="text-sm ml-2 text-gray-700 dark:text-white">{university}</span>
+            University:
+            {readOrEditInput(isEditable, userData.university, handleChange)}
           </p>
           <p className="text-sm font-medium text-gray-600 dark:text-white">
-            Field: <span className="text-sm ml-2 text-gray-700 dark:text-white">{field_of_study}</span>
+            Field:
+            {readOrEditInput(isEditable, userData.field_of_study, handleChange)}
           </p>
         </div>
       </div>

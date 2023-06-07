@@ -80,7 +80,7 @@ const ProfileOverview = () => {
             gender={userInfo?.gender}
             phone_number={userInfo?.phone_number}
             address={userInfo?.address}
-            zip_code={userInfo?.zip}
+            zip={userInfo?.zip}
             personal_email={userInfo?.personal_email}
             email={userInfo?.email}
           />
