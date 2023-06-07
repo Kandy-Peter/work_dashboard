@@ -1,18 +1,20 @@
-import React, { useState } from "react";
+import React from "react";
 
 const readOrEditInput = (
   isEditable: boolean,
-  value: string,
+  value: string | number,
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
-  inputType: string = "text"
+  // inputType: string,
+  id: string,
 ) => {
   if (isEditable) {
     return (
       <input
-        type={inputType}
+        type="text"
         className="ml-2 text-sm text-gray-700 dark:text-white"
         value={value}
         onChange={onChange}
+        id={id}
       />
     );
   } else {

@@ -66,23 +66,8 @@ const ProfileOverview = () => {
       <div className="grid h-full grid-cols-1 gap-5 lg:!grid-cols-12">
         <div className="col-span-5 lg:col-span-6 lg:mb-0 3xl:col-span-5">
           <General
-            education={userInfo?.education}
-            university={userInfo?.university}
-            field_of_study={userInfo?.field_of_study}
-            bio={userInfo?.bio}
-            birthday={userInfo?.date_of_birth}
-            nationality={userInfo?.nationality}
-            national_id={userInfo?.national_id}
-            age={userInfo?.age}
-            marital_status={userInfo?.marital_status}
-            country={userInfo?.country}
-            city={userInfo?.city}
-            gender={userInfo?.gender}
-            phone_number={userInfo?.phone_number}
-            address={userInfo?.address}
-            zip={userInfo?.zip}
-            personal_email={userInfo?.personal_email}
-            email={userInfo?.email}
+            userData={userInfo}
+            setUserData={setUserInfo}
           />
         </div>
         <div className="col-span-5 lg:col-span-6 lg:mb-0 3xl:col-span-4">

@@ -18,8 +18,6 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [userInfo, setUserInfo] = useState({});
   const [theme, setTheme] = useState('light');
 
-  console.log(userInfo)
-
   return (
     <UserContext.Provider value={
       {

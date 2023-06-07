@@ -1,6 +1,6 @@
 import Card from "components/card";
 
-const Storage = ({postion, department, department2, employment_date, employee_id, branch}: BannerProps) => {
+const Storage = ({postion, department, department2, employment_date, employee_id, branch, salary}: BannerProps) => {
   return (
     <Card extra={"w-full h-full p-4"}>
       <div className="mb-8 mt-2 w-full">
@@ -9,7 +9,7 @@ const Storage = ({postion, department, department2, employment_date, employee_id
         </h4>
       </div>
 
-      <div className="grid grid-cols-1 gap-5 px-2">
+      <div className="grid grid-cols-1 gap-4 px-2">
           <p className="text-sm font-medium text-gray-600 dark:text-white">
             Branch: <span className="text-sm ml-2 text-gray-700 dark:text-white">{branch}</span>
           </p>
@@ -27,6 +27,9 @@ const Storage = ({postion, department, department2, employment_date, employee_id
           </p>
           <p className="text-sm font-medium text-gray-600 dark:text-white">
             Employee ID: <span className="text-sm ml-2 text-gray-700 dark:text-white">{employee_id}</span>
+          </p>
+          <p className="text-sm font-medium text-gray-600 dark:text-white">
+            Salary: <span className="text-sm ml-2 text-gray-700 dark:text-white">{salary}</span>
           </p>
       </div>
     </Card>
