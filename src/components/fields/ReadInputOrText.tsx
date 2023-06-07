@@ -12,7 +12,7 @@ const readOrEditInput = (
       <input
         type="text"
         className="ml-2 text-sm text-gray-700 dark:text-white"
-        value={value}
+        defaultValue={value}
         onChange={onChange}
         id={id}
       />
