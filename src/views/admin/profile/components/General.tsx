@@ -7,20 +7,13 @@ import readOrEditInput from "components/fields/ReadInputOrText";
 
 interface GeneralProps {
   userData: any;
-  setUserData: any;
+  updateUserInfo: (_data: any) => void;
 }
 
-const General = ({ userData, setUserData }: GeneralProps) => {
+const General = ({ userData, updateUserInfo }: GeneralProps) => {
   // make the card editable for the user to update his information
   const [isEditable, setIsEditable] = useState(false);
   const [updatedUserData, setUpdatedUserData] = useState(userData);
-
-  function handleUpdate() {
-    // send the data to the backend
-    // if the request is successful, update the state
-    // if not, show an error message
-    console.log(updatedUserData);
-  }
 
   const handleEdit = () => {
     setIsEditable(true);
@@ -36,10 +29,16 @@ const General = ({ userData, setUserData }: GeneralProps) => {
 
   const handleSave = () => {
     toast.loading("Updating...");
-    setIsEditable(false);
-    handleUpdate();
-    toast.dismiss();
-    toast.success("Updated successfully");
+    console.log(updatedUserData)
+    if (updatedUserData) {
+      updateUserInfo(updatedUserData);
+      toast.dismiss();
+      setIsEditable(false);
+      toast.success("Updated successfully");
+    } else {
+      toast.dismiss();
+      toast.error("No changes were made");
+    }
   };
 
   return (
@@ -57,7 +56,7 @@ const General = ({ userData, setUserData }: GeneralProps) => {
         </h4>
         <p className="mt-2 px-2 text-base text-gray-600">
           Bio:
-          {readOrEditInput(isEditable, userData?.bio, onChange, "bio")}
+          {readOrEditInput(isEditable, userData?.bio, onChange, "bio", "textArea")}
         </p>
       </div>
       {/* Cards */}
@@ -71,7 +70,7 @@ const General = ({ userData, setUserData }: GeneralProps) => {
           </p>
           <p className="text-sm font-medium text-gray-600 dark:text-white">
             Birthday:
-            {readOrEditInput(isEditable, userData?.date_of_birth, onChange, "date_of_birth")}
+            {readOrEditInput(isEditable, userData?.date_of_birth, onChange, "date_of_birth", "date")}
           </p>
           <p className="text-sm font-medium text-gray-600 dark:text-white">
             Marital Status:
@@ -117,7 +116,7 @@ const General = ({ userData, setUserData }: GeneralProps) => {
             Work Email: <span className="text-sm ml-2 text-gray-700 dark:text-white">{userData?.email}</span>
           </p>
           <p className="text-sm font-medium text-gray-600 dark:text-white">
-            Personal Email:
+            Email:
             {readOrEditInput(isEditable, userData?.personal_email, onChange, "personal_email")}
           </p>
           <p className="text-sm font-medium text-gray-600 dark:text-white">
@@ -130,7 +129,7 @@ const General = ({ userData, setUserData }: GeneralProps) => {
           <p className="text-sm text-sky-800 mb-2">Education</p>
           <p className="text-sm font-medium text-gray-600 dark:text-white">
             Level:
-            {readOrEditInput(isEditable, userData?.education, onChange, "education")}
+            {readOrEditInput(isEditable, userData?.level_of_education, onChange, "level_of_education")}
           </p>
           <p className="text-sm font-medium text-gray-600 dark:text-white">
             University:

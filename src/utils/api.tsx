@@ -38,9 +38,10 @@ export const useApi = () => {
     "authenticated",
     "avatar",
     "username",
-    "organization_id",
     "slug",
     "name",
+    "id",
+    "status"
   ];
   const [cookies, setCookie, removeCookie] = useCookies(validCookieNames);
 
@@ -58,7 +59,7 @@ export const useApi = () => {
       await showSuccessToast(response.data.status.message);
 
       const { token } = response.data;
-      const { role, avatar, username, organization_id } = response.data.data;
+      const { role, avatar, username, id, status } = response.data.data;
       const { slug, name } = response.data.data.organization;
 
       const cookiesValues = {
@@ -67,9 +68,10 @@ export const useApi = () => {
         authenticated: true,
         avatar,
         username,
-        organization_id,
         slug,
         name,
+        id,
+        status
       };
 
       // Set the token, role, and authenticated cookies
@@ -141,7 +143,7 @@ export const useApi = () => {
     }
   };
 
-  const getUserProfile = async (token: string, organization_id = "bernier-klocko-and-bernier") => {
+  const getUserProfile = async (token: string, organization_id: string) => {
     try {
       const response = await api.get(`/${organization_id}/profile`, {
         headers: {
@@ -160,24 +162,6 @@ export const useApi = () => {
       throw new Error(errorMessage);
     }
   };
-
-  // const updateUserInfo = async (data: any, token: string) => {
-  //   try {
-  //     const response = await api.put("/:organization_id/profile", data, {
-  //       headers: {
-  //         Authorization: `Bearer ${token}`,
-  //       },
-  //     });
-  //     const { data: responseData } = response.data;
-  //     showSuccessToast(response.data.status.message);
-  //     return responseData;
-  //   } catch (error: any) {
-  //     const errorMessage =
-  //       error.response?.data?.status?.message || "An error occurred";
-  //     showErrorToast(errorMessage);
-  //     throw new Error(errorMessage);
-  //   }
-  // };
 
   const updateRole = async (data: any, token: string) => {
     try {

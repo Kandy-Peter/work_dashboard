@@ -64,9 +64,10 @@ declare global {
 		country?: string;
 		role?: string;
 		salary?: string;
-		usernames?: string;
+		username?: string;
+		status?: string;
 		zipCode?: string;
-		education?: string,
+		level_of_education?: string,
 		university?: string,
 		field_of_study? :string,
 		birthday?: date,

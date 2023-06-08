@@ -1,7 +1,7 @@
 import banner from "assets/img/profile/banner.png";
 import Card from "components/card";
 
-const Banner = ({avatar, lastName, firstName, role, bio}: BannerProps) => {
+const Banner = ({avatar, lastName, firstName, role, username, status}: BannerProps) => {
   const capitalizeFirstLetter = (string: string) => {
     if (string === undefined) return;
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -13,7 +13,7 @@ const Banner = ({avatar, lastName, firstName, role, bio}: BannerProps) => {
         className="relative mt-1 flex h-32 w-full justify-center rounded-xl bg-cover"
         style={{ backgroundImage: `url(${banner})` }}
       >
-        <div className="absolute -bottom-12 flex h-[87px] w-[87px] items-center justify-center rounded-full border-[4px] border-white bg-pink-400 dark:!border-sky-700">
+        <div className="absolute -bottom-12 flex h-[100px] w-[100px] items-center justify-center rounded-full border-[4px] border-white bg-pink-400 dark:!border-sky-700">
           <img className="h-full w-full rounded-full" src={avatar} alt="" />
         </div>
       </div>

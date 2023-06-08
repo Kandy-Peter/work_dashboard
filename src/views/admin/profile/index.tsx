@@ -11,7 +11,7 @@ import Upload from "./components/Upload";
 import { api } from "utils/api";
 
 const ProfileOverview = () => {
-  const [cookies] = useCookies(["token", "slug", "name"]);
+  const [cookies] = useCookies(["token", "slug", "name", "id"]);
 
   const [userInfo, setUserInfo] = React.useState<any>({});
 
@@ -27,6 +27,26 @@ const ProfileOverview = () => {
       const { data } = response
       toast.dismiss();
       setUserInfo(data);
+    } catch (error: any) {
+      toast.dismiss();
+      const errorMessage =
+        error.response?.data?.status?.message || "An error occurred";
+      toast.error(errorMessage);
+      throw new Error(errorMessage);
+    }
+  };
+
+  const updateUserInfo = async (_data: any) => {
+    try {
+      toast.loading("Updating...");
+      await api.put(`/${cookies.slug}/users/${cookies.id}`, _data, {
+        headers: {
+          Authorization: `Bearer ${cookies.token}`,
+        },
+      });
+
+      toast.dismiss();
+      window.location.reload();
     } catch (error: any) {
       toast.dismiss();
       const errorMessage =
@@ -67,7 +87,7 @@ const ProfileOverview = () => {
         <div className="col-span-5 lg:col-span-6 lg:mb-0 3xl:col-span-5">
           <General
             userData={userInfo}
-            setUserData={setUserInfo}
+            updateUserInfo={updateUserInfo}
           />
         </div>
         <div className="col-span-5 lg:col-span-6 lg:mb-0 3xl:col-span-4">
