@@ -1,7 +1,49 @@
+import React from "react";
 import banner from "assets/img/profile/banner.png";
 import Card from "components/card";
+import Modal from "components/modal";
+import { MdFileUpload } from "react-icons/md";
+import { api } from "utils/api";
+import toast from "react-hot-toast";
+import { useCookies } from "react-cookie";
+import FileUpload from "components/fields/dragAndDropInput";
 
 const Banner = ({avatar, lastName, firstName, role, username, status}: BannerProps) => {
+  const [image, setImage] = React.useState({
+    preview: "",
+    raw: null,
+  })
+
+  const [cookies] = useCookies(["token", "slug", "id"]);
+
+  const handleUpload = async () => {
+    try {
+      toast.loading("Uploading...");
+      const formData = new FormData();
+      formData.append("avatar", image.raw);
+      const response = await api.put(`/${cookies.slug}/users/${cookies.id}`, formData, {
+        headers: {
+          Authorization: `Bearer ${cookies.token}`,
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      const { data: responseData } = response.data;
+      toast.dismiss();
+      toast.success("Profile updated successfully");
+      setImage({
+        preview: "",
+        raw: null,
+      })
+      return responseData;
+    } catch (error: any) {
+      toast.dismiss();
+      const errorMessage =
+        error.response?.data?.status?.message || "An error occurred";
+      toast.error(errorMessage);
+      throw new Error(errorMessage);
+    }
+  }
+
   const capitalizeFirstLetter = (string: string) => {
     if (string === undefined) return;
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -16,6 +58,23 @@ const Banner = ({avatar, lastName, firstName, role, username, status}: BannerPro
         <div className="absolute -bottom-12 flex h-[100px] w-[100px] items-center justify-center rounded-full border-[4px] border-white bg-pink-400 dark:!border-sky-700">
           <img className="h-full w-full rounded-full" src={avatar} alt="" />
         </div>
+        <Modal
+          button={<button className="text-sm font-bold text-white">Edit</button>}
+          classNames="py-2 left-0 right-0 w-full"
+          animation="origin-[65%_0%] md:origin-top-right transition-all duration-300 ease-in-out"
+          onClose={() => {}}
+          handleUpload={handleUpload}
+          children={
+            <div className="flex w-[360px] h-[100%] flex-col gap-3 rounded-[10px] bg-white p-4 shadow-xl shadow-shadow-500 dark:!bg-sky-700 dark:text-white dark:shadow-none sm:w-[460px]">
+              {image.preview ? (
+                <img className="h-[200px] w-full rounded-xl" src={image.preview} alt="" />
+              ) : (
+                <FileUpload maxFiles={1} size={10} formats={["png", "jpg", "gif", 'jpeg']} setImage={setImage} />
+              )}
+            </div>
+          }
+        />
+
       </div>
 
       {/* Name and position */}
