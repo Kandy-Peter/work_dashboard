@@ -55,12 +55,19 @@ export const useApi = () => {
       // Make the login API request
       const loadingToast = showLoadingToast("Logging in...");
       const response = await api.post("/auth/login", { email, password });
-      toast.dismiss(loadingToast);
-      await showSuccessToast(response.data.status.message);
 
       const { token } = response.data;
-      const { role, avatar, username, id, status } = response.data.data;
-      const { slug, name } = response.data.data.organization;
+      const { role, avatar, username, id, status, organization_id } = response.data.data;
+
+      if (organization_id === null || organization_id === undefined && role !== 'super_admin') {
+        toast.dismiss(loadingToast);
+        toast.error("You are not a member of any organization");
+        throw new Error("You are not a member of any organization");
+      }
+      
+      const { slug, name } = response.data.data?.organization;
+
+      console.log('response.data', response.data)
 
       const cookiesValues = {
         token,
@@ -82,14 +89,21 @@ export const useApi = () => {
         });
       });
 
+      // Dismiss the loading toast and show a success toast
+      toast.dismiss(loadingToast);
+      showSuccessToast(response.data.status.message);
+
+      // Navigate to the home page
       navigate("/");
+
       return response.data;
     } catch (error: any) {
       toast.dismiss();
+      console.log('error', error)
       const errorMessage =
         error.response?.data?.status?.message || "An error occurred";
       showErrorToast(errorMessage);
-      throw new Error(errorMessage);
+      throw error;
     }
   };
 
@@ -187,7 +201,6 @@ export const useApi = () => {
     resetPassword,
     updatePassword,
     getUserProfile,
-    // updateUserInfo,
     updateRole,
   };
 };
