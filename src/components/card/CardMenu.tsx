@@ -3,7 +3,7 @@ import Dropdown from "components/dropdown";
 import { AiOutlineUser } from "react-icons/ai";
 import { BsThreeDots } from "react-icons/bs";
 import { FiSettings } from "react-icons/fi";
-import { AiOutlineShop } from "react-icons/ai";
+import { AiOutlineShop, AiFillEdit } from "react-icons/ai";
 import { TiLightbulb } from "react-icons/ti";
 
 function CardMenu(props: { transparent?: boolean }) {
@@ -27,12 +27,12 @@ function CardMenu(props: { transparent?: boolean }) {
       classNames={`${transparent ? "top-8" : "top-11"} right-0 w-max`}
       children={
         <div className="z-50 w-max rounded-xl bg-white py-3 px-4 text-sm shadow-xl shadow-shadow-500 dark:!bg-sky-700 dark:shadow-none">
-          <p className="hover:text-black flex cursor-pointer items-center gap-2 text-gray-600 hover:font-medium">
+          <button className="hover:text-black flex cursor-pointer items-center gap-2 text-gray-600 hover:font-medium">
             <span>
-              <AiOutlineUser />
+              <AiFillEdit />
             </span>
-            Panel 1
-          </p>
+            Edit
+          </button>
           <p className="hover:text-black mt-2 flex cursor-pointer items-center gap-2 pt-1 text-gray-600 hover:font-medium">
             <span>
               <AiOutlineShop />
