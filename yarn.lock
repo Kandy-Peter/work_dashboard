@@ -2066,10 +2066,10 @@
   resolved "https://registry.npmjs.org/@leichtgewicht/ip-codec/-/ip-codec-2.0.4.tgz"
   integrity sha512-Hcv+nVC0kZnQ3tD9GVu5xSMR4VVYOteQIr/hwFPVEvPdlXqgGEuRjiheChHgdM+JyqdgNcmzZOX/tnl0JOiI7A==
 
-"@material-tailwind/react@^2.0.1":
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/@material-tailwind/react/-/react-2.0.1.tgz#ddb3f97b6320158545c9bfb827c60319590b569d"
-  integrity sha512-V40Tq9gJB6lIdsob4DXEDKoVzJ5BqOcj5hq4VepwJhLkQ2pKlWh7GIpFQtq6Pmhw65CmSQ3bjOzm/5YbeMycAA==
+"@material-tailwind/react@^2.0.5":
+  version "2.0.5"
+  resolved "https://registry.yarnpkg.com/@material-tailwind/react/-/react-2.0.5.tgz#ed5f76ee6aabcf6c204ea06477ded449116728be"
+  integrity sha512-nHow36ADmWx48Z9jw5pLlRSq37o0+8J/UJYrZJRM+rPyE3j8wu+/ZbJ7yH7/FfF86/83D5yEMqGepG4TKAcEEg==
   dependencies:
     "@floating-ui/react" "^0.19.0"
     "@heroicons/react" "^2.0.13"
