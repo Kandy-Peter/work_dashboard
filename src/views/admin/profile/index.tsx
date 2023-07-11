@@ -6,7 +6,7 @@ import Banner from "./components/Banner";
 import General from "./components/General";
 import Notification from "./components/Notification";
 import Project from "./components/Project";
-import Storage from "./components/Storage";
+import EmployeeInfo from "./components/EmployeeInfo";
 import Upload from "./components/Upload";
 import { api } from "utils/api";
 
@@ -60,6 +60,8 @@ const ProfileOverview = () => {
     getUserInfo();
   } , []);
 
+  console.log(userInfo)
+
   return (
     <div className="flex w-full flex-col gap-5">
       <div className="w-ful mt-3 flex h-fit flex-col gap-5 lg:grid lg:grid-cols-12">
@@ -74,7 +76,16 @@ const ProfileOverview = () => {
         </div>
 
         <div className="col-span-3 lg:!mb-0">
-          <Storage />
+          <EmployeeInfo
+            postion= {userInfo?.position}
+            department= {userInfo?.departments && userInfo?.departments[0]?.name}
+            department2= {userInfo?.departments && userInfo?.departments[1]?.name}
+            employment_date= {userInfo?.employment_date}
+            employee_id= {userInfo?.employee_id}
+            branch= {cookies.name}
+            salary= {userInfo?.salary}
+
+          />
         </div>
 
         <div className="z-0 col-span-5 lg:!mb-0">

@@ -59,7 +59,7 @@ export const useApi = () => {
       const { token } = response.data;
       const { role, avatar, username, id, status, organization_id } = response.data.data;
 
-      if (organization_id === null || organization_id === undefined && role !== 'super_admin') {
+      if ((organization_id === null || organization_id === undefined) && role !== 'super_admin') {
         toast.dismiss(loadingToast);
         toast.error("You are not a member of any organization");
         throw new Error("You are not a member of any organization");

@@ -1,6 +1,6 @@
 import Card from "components/card";
 
-const Storage = ({postion, department, department2, employment_date, employee_id, branch, salary}: BannerProps) => {
+const EmployeeInfo = ({postion, department, department2, employment_date, employee_id, branch, salary}: BannerProps) => {
   return (
     <Card extra={"w-full h-full p-4"}>
       <div className="mb-8 mt-2 w-full">
@@ -19,9 +19,11 @@ const Storage = ({postion, department, department2, employment_date, employee_id
           <p className="text-sm font-medium text-gray-600 dark:text-white">
             Department: <span className="text-sm ml-2 text-gray-700 dark:text-white">{department}</span>
           </p>
-          <p className="text-sm font-medium text-gray-600 dark:text-white">
-            Second Department: <span className="text-sm ml-2 text-gray-700 dark:text-white">{department2}</span>
-          </p>
+          {department2 && (
+            <p className="text-sm font-medium text-gray-600 dark:text-white">
+              Second Department: <span className="text-sm ml-2 text-gray-700 dark:text-white">{department2}</span>
+            </p>
+          )}
           <p className="text-sm font-medium text-gray-600 dark:text-white">
             Employment date: <span className="text-sm ml-2 text-gray-700 dark:text-white">{employment_date}</span>
           </p>
@@ -29,11 +31,11 @@ const Storage = ({postion, department, department2, employment_date, employee_id
             Employee ID: <span className="text-sm ml-2 text-gray-700 dark:text-white">{employee_id}</span>
           </p>
           <p className="text-sm font-medium text-gray-600 dark:text-white">
-            Salary: <span className="text-sm ml-2 text-gray-700 dark:text-white">{salary}</span>
+            Salary: <span className="text-sm ml-2 text-gray-700 dark:text-white">{`${salary} usd`}</span>
           </p>
       </div>
     </Card>
   );
 };
 
-export default Storage;
+export default EmployeeInfo;
