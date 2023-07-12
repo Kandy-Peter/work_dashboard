@@ -1,4 +1,14 @@
-import TimelineComponent from "components/timeline";
+import {
+  Timeline,
+} from "@material-tailwind/react";
+
+import {
+  BellIcon,
+  ArchiveBoxIcon,
+  CurrencyDollarIcon,
+} from "@heroicons/react/24/solid";
+
+import TimelineItem from "components/timeline";
 import ProgressImage from "assets/img/home/section_attendance.png";
 
 
@@ -20,7 +30,27 @@ const Attendance = () => {
               Effortlessly Track, Manage, and Optimize Your Workforce's Productivity. Say Goodbye to Manual Processes and Embrace Seamless Time Tracking Solutions!
               </p>
               {/* Timeline with description */}
-              <TimelineComponent />
+              <div className="max-w-[25rem] py-5">
+                <Timeline>
+                  <TimelineItem
+                    connector
+                    icon={<BellIcon className="h-3 w-3" />}
+                    text="$2400, Design changes"
+                  />
+                  <TimelineItem
+                    connector
+                    icon={<ArchiveBoxIcon className="h-3 w-3" />}
+                    colorIcon="red"
+                    text="New order #1832412"
+                  />
+                  <TimelineItem
+                    connector={false}
+                    icon={<CurrencyDollarIcon className="h-3 w-3" />}
+                    colorIcon="green"
+                    text="Payment completed for order #4395133"
+                  />
+                </Timeline>
+              </div>
             </div>
           </div>
       </div>

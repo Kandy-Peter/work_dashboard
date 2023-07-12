@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import {useState} from "react";
 import Attendance from "./attendance";
 import Onboarding from "./onboarding";
 import Payroll from "./Payroll";
