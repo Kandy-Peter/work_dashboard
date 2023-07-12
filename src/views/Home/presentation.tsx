@@ -7,7 +7,7 @@ import {
 const Presentation = () => {
   return (
     <div className="flex flex-col h-full w-full">
-      <div className="h-full w-full bg-lightPrimary dark:!bg-sky-900">
+      <div className="h-full w-full border">
         <div className="flex flex-col-reverse lg:flex-row items-center justify-between px-4 lg:px-40 py-4 h-full ">
           <div className="flex items-center gap-4">
             <div className="flex flex-col">

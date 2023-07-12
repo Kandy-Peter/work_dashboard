@@ -1,7 +1,7 @@
-import React from 'react';
-import { Routes, Route, Navigate } from "react-router-dom";
 import ComplexNavbar from "components/navbar/home_navbar";
 import Presentation from "views/Home/presentation";
+import Banner from "views/Home/banner";
+import RequestForm from "views/Home/request_form";
 
 const Home = () => {
   return (
@@ -10,6 +10,8 @@ const Home = () => {
           <div className="h-full">
             <ComplexNavbar />
             <Presentation />
+            <Banner />
+            <RequestForm />
           </div>
       </div>
     </div>
