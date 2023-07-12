@@ -76,7 +76,7 @@ const RequestForm = () => {
                 error=""
                 onChange={() => {}}
               />
-              <div className="flex flex-wrap items-center justify-between gap-3">
+              <div className="lg:flex flex-wrap items-center justify-between lg:gap-3">
               {/* Organization name */}
                 <InputField
                   variant="demo"

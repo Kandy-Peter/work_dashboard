@@ -48,7 +48,7 @@ function NavList() {
   );
 }
  
-export default function Example() {
+export default function Navbar() {
   const [openNav, setOpenNav] = React.useState(false);
   const [isScrolled, setIsScrolled] = React.useState(false);
  
@@ -72,7 +72,7 @@ export default function Example() {
   }, []);
  
   return (
-    <div className={`navbar mx-auto px-4 py-1 ${isScrolled ? 'bg-white shadow-md' : ''}`}>
+    <div className={`navbar mx-auto px-4 py-1 ${isScrolled ? 'bg-white shadow-md border-none' : ''}`}>
       <div className="flex lg:px-40 items-center justify-between text-cyan-900">
         <Typography
           as="a"
