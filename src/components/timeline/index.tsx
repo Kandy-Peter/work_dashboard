@@ -25,7 +25,7 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
   return (
     <MaterialTimelineItem className="h-20">
       {connector && <TimelineConnector className="!w-[3px] bg-gray-400 ml-5" />}
-      <TimelineHeader className="relative rounded-xl border border-blue-gray-50 bg-white py-2 pl-3 pr-8 shadow-lg shadow-blue-gray-900/5">
+      <TimelineHeader className="relative rounded-xl border border-blue-gray-50 bg-lightPrimary py-2 pl-3 pr-8 shadow-lg shadow-blue-gray-900/5">
         <TimelineIcon
           className={`p-1 bg-${colorIcon}-100`}
           variant="ghost"

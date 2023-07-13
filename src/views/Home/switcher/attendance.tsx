@@ -3,8 +3,10 @@ import {
 } from "@material-tailwind/react";
 
 import {
-  BellIcon,
-  ArchiveBoxIcon,
+  ClockIcon,
+  DocumentChartBarIcon,
+  DocumentCheckIcon,
+  CalendarDaysIcon,  
   CurrencyDollarIcon,
 } from "@heroicons/react/24/solid";
 
@@ -34,20 +36,22 @@ const Attendance = () => {
                 <Timeline>
                   <TimelineItem
                     connector
-                    icon={<BellIcon className="h-3 w-3" />}
-                    text="$2400, Design changes"
+                    icon={<ClockIcon className="h-3 w-3" />}
+                    text="Accurate time tracking for employees"
                   />
                   <TimelineItem
                     connector
-                    icon={<ArchiveBoxIcon className="h-3 w-3" />}
-                    colorIcon="red"
-                    text="New order #1832412"
+                    icon={<CalendarDaysIcon className="h-3 w-3" />}
+                    text="Streamlined attendance management for employees"
+                  />
+                  <TimelineItem
+                    icon={<DocumentCheckIcon className="h-3 w-3" />}
+                    text="Flexible leave management on the go"
                   />
                   <TimelineItem
                     connector={false}
-                    icon={<CurrencyDollarIcon className="h-3 w-3" />}
-                    colorIcon="green"
-                    text="Payment completed for order #4395133"
+                    icon={<DocumentChartBarIcon className="h-3 w-3" />}
+                    text="Insight and analytics on employee productivity"
                   />
                 </Timeline>
               </div>
