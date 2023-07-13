@@ -5,6 +5,8 @@ import RequestFormSection from "views/Home/request_form";
 import RessourcesSwitcherSection from "views/Home/switcher";
 import SecuritySection from "views/Home/security";
 import WhyHeriSection from "views/Home/why_heri";
+import LinksSection from "views/Home/links";
+import Footer from "views/Home/footer";
 
 const Home = () => {
   return (
@@ -18,6 +20,8 @@ const Home = () => {
             <RessourcesSwitcherSection />
             <SecuritySection />
             <WhyHeriSection />
+            <LinksSection />
+            <Footer />
           </div>
       </div>
     </div>

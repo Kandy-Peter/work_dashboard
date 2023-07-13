@@ -10,7 +10,6 @@ import {
 } from "@heroicons/react/24/solid";
 
 import CardHomePage from 'components/card/CardHomePage';
-import { BsArrowRightCircleFill } from 'react-icons/bs';
 
 const cardData =[
   {

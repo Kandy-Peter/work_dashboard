@@ -25,7 +25,7 @@ input.defaultCheckbox::before {
 	transform: translate(-50%, 0px);
 } 
 
-input:checked.defaultCheckbox::before { 
+input:checked.defaultCheckbox::before {
 	opacity: 1;
 }
 
@@ -56,4 +56,11 @@ input:checked.defaultCheckbox::before {
 .scroll-smoothing {
 	scroll-behavior: smooth;
 	-webkit-overflow-scrolling: touch;
+}
+
+.section-6 {
+	background-image: url(../src/assets/img/home/sectionWhyHeri.png);
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
 }
