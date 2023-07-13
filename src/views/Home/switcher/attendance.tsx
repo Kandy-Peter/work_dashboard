@@ -7,7 +7,6 @@ import {
   DocumentChartBarIcon,
   DocumentCheckIcon,
   CalendarDaysIcon,  
-  CurrencyDollarIcon,
 } from "@heroicons/react/24/solid";
 
 import TimelineItem from "components/timeline";

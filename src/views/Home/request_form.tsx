@@ -7,7 +7,7 @@ import {
   ShieldCheckIcon,
 } from "@heroicons/react/24/outline";
 
-const RequestForm = () => {
+const RequestFormSection = () => {
   return (
     <div className="flex flex-col items-center justify-center w-full bg-sky-800 py-4">
       <div className="flex flex-col items-center justify-center p-4 lg:flex-row lg:justify-between lg:px-60">
@@ -148,4 +148,4 @@ const RequestForm = () => {
   );
 }
 
-export default RequestForm;
+export default RequestFormSection;

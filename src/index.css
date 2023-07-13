@@ -52,3 +52,8 @@ input:checked.defaultCheckbox::before {
   opacity: 0;
   transition: opacity 500ms ease-in;
 }
+
+.scroll-smoothing {
+	scroll-behavior: smooth;
+	-webkit-overflow-scrolling: touch;
+}

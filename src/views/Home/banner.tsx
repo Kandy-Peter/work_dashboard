@@ -1,6 +1,5 @@
-import React from "react";
 
-const Banner = () => {
+const BannerSection = () => {
   return(
     <div className="flex flex-col items-center justify-center bg-gray-200 p-4">
       <span className="text-sm text-gray-700 dark:text-gray-300 w-full lg:px-40">
@@ -24,4 +23,4 @@ const Banner = () => {
   )
 }
 
-export default Banner;
+export default BannerSection;

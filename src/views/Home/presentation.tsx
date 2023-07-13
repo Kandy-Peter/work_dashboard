@@ -4,7 +4,7 @@ import {
   CheckIcon,
 } from "@heroicons/react/24/outline";
 
-const Presentation = () => {
+const PresentationSection = () => {
   return (
     <div className="flex flex-col h-full w-full">
       <div className="h-full w-full">
@@ -57,4 +57,4 @@ const Presentation = () => {
   );
 }
 
-export default Presentation;
+export default PresentationSection;
