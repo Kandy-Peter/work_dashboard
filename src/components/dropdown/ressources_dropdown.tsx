@@ -15,9 +15,8 @@ import {
   ChatBubbleOvalLeftIcon,
   UsersIcon,
   FolderIcon,
-  Square3Stack3DIcon,
   RocketLaunchIcon,
-  FaceSmileIcon,
+  HandRaisedIcon,
   PuzzlePieceIcon,
   GiftIcon,
 } from "@heroicons/react/24/outline";
@@ -77,23 +76,23 @@ const navListMenuItems = [
     description: "Checkout our products that helps a startup running.",
   },
   {
-    color: "teal",
-    icon: FaceSmileIcon,
-    title: "Icons",
-    description: "Set of beautiful icons that you can use in your project.",
-  },
-  {
     color: "cyan",
     icon: PuzzlePieceIcon,
-    title: "UI Kits",
-    description: "High quality UI Kits helps you to 2x faster.",
+    title: "Knowledge Base",
+    description: "Checkout our knowledge base to learn more about us.",
   },
   {
-    color: "pink",
-    icon: GiftIcon,
-    title: "Open Source",
-    description: "List of all our open-source projects, it's all free.",
+    color: "teal",
+    icon: HandRaisedIcon,
+    title: "Help Center",
+    description: "Checkout our help center for any questions you have.",
   },
+  // {
+  //   color: "pink",
+  //   icon: GiftIcon,
+  //   title: "Open Source",
+  //   description: "List of all our open-source projects, it's all free.",
+  // },
 ];
  
 export default function NavListMenu() {
@@ -103,8 +102,8 @@ export default function NavListMenu() {
   const renderItems = navListMenuItems.map(
     ({ icon, title, description, color }, key) => (
       <a href="/" key={key}>
-        <MenuItem className="flex items-center gap-3 rounded-lg">
-          <div className={`rounded-lg p-5 ${colors[color]}`}>
+        <MenuItem className="flex items-center gap-3 outline-none">
+          <div className={` p-5 ${colors[color]}`}>
             {React.createElement(icon, {
               strokeWidth: 2,
               className: "h-6 w-6",
@@ -113,12 +112,11 @@ export default function NavListMenu() {
           <div>
             <Typography
               variant="h6"
-              color="blue-gray"
-              className="flex items-center text-sm"
+              className="flex items-center text-sm text-cyan-950 text-semibold"
             >
               {title}
             </Typography>
-            <Typography variant="small" color="gray" className="font-normal">
+            <Typography variant="small" className="text-cyan-800">
               {description}
             </Typography>
           </div>
@@ -143,7 +141,6 @@ export default function NavListMenu() {
               selected={isMenuOpen || isMobileMenuOpen}
               onClick={() => setIsMobileMenuOpen((cur) => !cur)}
             >
-              <Square3Stack3DIcon className="h-[18px] w-[18px]" />
               Resources
               <ChevronDownIcon
                 strokeWidth={2.5}
@@ -160,7 +157,7 @@ export default function NavListMenu() {
             </ListItem>
           </Typography>
         </MenuHandler>
-        <MenuList className="hidden max-w-screen-xl rounded-xl lg:block">
+        <MenuList className="hidden max-w-screen-xl lg:block outline-none">
           <ul className="grid grid-cols-4 gap-y-2">{renderItems}</ul>
         </MenuList>
       </Menu>

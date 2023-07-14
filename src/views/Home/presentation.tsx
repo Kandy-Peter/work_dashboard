@@ -1,10 +1,13 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import MainImage from "assets/img/dashboards/main_image.svg";
 import {
   CheckIcon,
 } from "@heroicons/react/24/outline";
 
 const PresentationSection = () => {
+  const navigate = useNavigate();
   return (
     <div className="flex flex-col h-full w-full">
       <div className="h-full w-full">
@@ -42,7 +45,7 @@ const PresentationSection = () => {
                 </ul>
               </div>
               <div className="flex items-center mt-4 lg:mt-10">
-                <button className="bg-cyan-600 hover:bg-cyan-700 text-white py-2 px-4 rounded">
+                <button className="bg-cyan-600 hover:bg-cyan-700 text-white py-2 px-4 rounded" onClick={() => navigate('/request-demo')}>
                   GET STARTED
                 </button>
               </div>

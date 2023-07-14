@@ -4,6 +4,7 @@ import AdminLayout from "layouts/admin";
 import AuthLayout from "layouts/auth";
 import PasswordLayout from "layouts/auth/forget_password_layout";
 import ResetPasswordLayout from "layouts/auth/reset_password_layout";
+import DemoFormPage from "layouts/get_started"
 import ProtectedRoute from "helpers/protected_routes";
 import Home from "layouts/home";
 
@@ -13,6 +14,7 @@ const App = () => {
       <Route path="auth/*" element={<AuthLayout />} />
       <Route path="admin/*" element={<ProtectedRoute><AdminLayout /></ProtectedRoute>} />
       <Route path="/" element={<Home />} />
+      <Route path="/request-demo" element={<DemoFormPage />} />
       <Route path="/password_reset" element={<PasswordLayout />} />
       <Route path="/password_resets/:token" element={<ResetPasswordLayout />} />
     </Routes>
